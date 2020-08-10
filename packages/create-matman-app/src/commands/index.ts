@@ -4,7 +4,7 @@ import { ArgsParsered } from '../types';
  * Command 需要实现的接口
  */
 export interface Command {
-  new (): Command;
+  new (context: ArgsParsered): Command;
   exec: () => void;
 }
 
@@ -27,6 +27,14 @@ export function collectCommands(name: string): ClassDecorator {
  * 注册插件
  * @param context vscode 上下文
  */
-export function execCommands(context: ArgsParsered) {
-  
+export async function execCommands(context: ArgsParsered) {
+  const command = context._[0];
+
+  const Method = commandsConstructor[command];
+
+  if (Method) {
+    new Method(context).exec();
+  } else {
+    throw new Error('命令不存在');
+  }
 }

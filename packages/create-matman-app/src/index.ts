@@ -3,8 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
 import yargs from 'yargs';
+import { execCommands } from './commands';
 
-(() => {
+(async () => {
   // 验证 Node 版本信息
   const currentNodeVersion = process.versions.node;
   const semver = currentNodeVersion.split('.');
@@ -33,10 +34,6 @@ import yargs from 'yargs';
           describe: '指定的文件夹名称',
           type: 'string',
         })
-        .option('verbose', {
-          describe: '打印额外的 logs',
-          type: 'boolean',
-        })
         .option('template ', {
           describe: '指定需要的模板',
           type: 'string',
@@ -44,5 +41,21 @@ import yargs from 'yargs';
         .option('use-npm', { describe: '强制使用 NPM', type: 'boolean' });
     })
     .command('info', '打印环境信息')
-    .parse();
+    .option('verbose', {
+      describe: '打印额外的 logs',
+      type: 'boolean',
+    });
+
+  // 得到参数
+  const params = program.parse();
+
+  try {
+    await execCommands(params);
+  } catch (e) {
+    if (params.verbose) {
+      console.error(e);
+    } else {
+      program.showHelp();
+    }
+  }
 })();
