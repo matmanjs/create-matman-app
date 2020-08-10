@@ -1,0 +1,25 @@
+{
+  "name": "create-matman-app",
+  "version": "0.1.0",
+  "description": "matman 脚手架工具",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matmanjs/create-matman-app.git"
+  },
+  "keywords": [
+    "test",
+    "e2e",
+    "matman",
+    "cli"
+  ],
+  "author": "wangjq4214 linjianghe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matmanjs/create-matman-app/issues"
+  },
+  "homepage": "https://github.com/matmanjs/create-matman-app#readme"
+}
