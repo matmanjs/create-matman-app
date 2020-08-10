@@ -1,12 +1,10 @@
 {
-  "name": "create-matman-app",
-  "version": "0.1.0",
-  "description": "matman 脚手架工具",
-  "main": "lib/index.js",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "build": "tsc",
-    "prepublishOnly": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "lerna run build",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -27,6 +25,7 @@
   "devDependencies": {
     "@umijs/fabric": "^2.2.2",
     "eslint": "^7.6.0",
+    "lerna": "^3.22.1",
     "prettier": "^2.0.5",
     "typescript": "^3.9.7"
   }
