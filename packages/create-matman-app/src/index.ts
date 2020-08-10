@@ -38,7 +38,7 @@ import { execCommands } from './commands';
           describe: '指定需要的模板',
           type: 'string',
         })
-        .option('use-npm', { describe: '强制使用 NPM', type: 'boolean' });
+        .option('use-yarn', { describe: '强制使用 YARN', type: 'boolean' });
     })
     .command('info', '打印环境信息')
     .option('verbose', {

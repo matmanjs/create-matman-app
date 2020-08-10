@@ -23,7 +23,7 @@
     "create-matman-app": "lib/index.js"
   },
   "publishConfig": {
-    "registry": "https://registry.npm.taobao.org"
+    "registry": "https://registry.npmjs.org/"
   },
   "repository": {
     "type": "git",
@@ -39,9 +39,15 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "envinfo": "^7.7.2",
+    "fs-extra": "^9.0.1",
+    "semver": "^7.3.2",
+    "validate-npm-package-name": "^3.0.0",
     "yargs": "^15.4.1"
   },
   "devDependencies": {
+    "@types/fs-extra": "^9.0.1",
+    "@types/semver": "^7.3.1",
+    "@types/validate-npm-package-name": "^3.0.0",
     "@types/yargs": "^15.0.5"
   }
 }
