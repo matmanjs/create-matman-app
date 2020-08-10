@@ -1,39 +1,34 @@
+import { Info } from './info';
 import { ArgsParsered } from '../types';
+
+export interface CommandConstructor {
+  new (context: ArgsParsered, packageJson: any): Command;
+}
 
 /**
  * Command 需要实现的接口
  */
 export interface Command {
-  new (context: ArgsParsered): Command;
   exec: () => void;
 }
 
 /**
  * 需要注册的命令的列表
  */
-const commandsConstructor: Record<string, Command> = {};
+const commandsConstructor: Record<string, CommandConstructor> = {
+  info: Info,
+};
 
 /**
- * 收集命令
- * 作为类装饰器使用
+ * 执行命令
  */
-export function collectCommands(name: string): ClassDecorator {
-  return (target: any): void => {
-    commandsConstructor[name] = target;
-  };
-}
-
-/**
- * 注册插件
- * @param context vscode 上下文
- */
-export async function execCommands(context: ArgsParsered) {
+export async function execCommands(context: ArgsParsered, packageJson: any) {
   const command = context._[0];
 
   const Method = commandsConstructor[command];
 
   if (Method) {
-    new Method(context).exec();
+    await new Method(context, packageJson).exec();
   } else {
     throw new Error('命令不存在');
   }

@@ -50,7 +50,7 @@ import { execCommands } from './commands';
   const params = program.parse();
 
   try {
-    await execCommands(params);
+    await execCommands(params, packageJson);
   } catch (e) {
     if (params.verbose) {
       console.error(e);
