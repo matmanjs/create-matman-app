@@ -1,7 +1,6 @@
-import { Info } from './info';
 import { ArgsParsered } from '../types';
 
-export interface CommandConstructor {
+interface CommandConstructor {
   new (context: ArgsParsered, packageJson: any): Command;
 }
 
@@ -15,9 +14,17 @@ export interface Command {
 /**
  * 需要注册的命令的列表
  */
-const commandsConstructor: Record<string, CommandConstructor> = {
-  info: Info,
-};
+const commandsConstructor: Record<string, CommandConstructor> = {};
+
+/**
+ * 收集命令
+ * 作为类装饰器使用
+ */
+export function collectCommands(name: string): ClassDecorator {
+  return (target: any): void => {
+    commandsConstructor[name] = target;
+  };
+}
 
 /**
  * 执行命令
@@ -28,8 +35,10 @@ export async function execCommands(context: ArgsParsered, packageJson: any) {
   const Method = commandsConstructor[command];
 
   if (Method) {
-    await new Method(context, packageJson).exec();
+    new Method(context, packageJson).exec();
   } else {
     throw new Error('命令不存在');
   }
 }
+
+export * from './info';

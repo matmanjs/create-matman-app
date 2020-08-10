@@ -2,9 +2,10 @@ import path from 'path';
 import chalk from 'chalk';
 // @ts-ignore
 import envinfo from 'envinfo';
-import { Command } from './index';
+import { Command, collectCommands } from './index';
 import { ArgsParsered } from '../types';
 
+@collectCommands('info')
 export class Info implements Command {
   private context: ArgsParsered;
 
