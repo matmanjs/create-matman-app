@@ -42,3 +42,4 @@ export async function execCommands(context: ArgsParsered, packageJson: any) {
 }
 
 export * from './info';
+export * from './init';

@@ -1,7 +1,9 @@
+import { execSync } from 'child_process';
+import { InitUtil } from './utils';
 import { Command, collectCommands } from '../index';
 import { ArgsParsered } from '../../types';
 
-@collectCommands('init')
+@collectCommands('new')
 export class Init implements Command {
   private context: ArgsParsered;
 
@@ -10,6 +12,12 @@ export class Init implements Command {
   }
 
   exec() {
-    console.log(this.context);
+    InitUtil.checkForLatestVersion().catch(() => {
+      try {
+        return execSync('npm view create-matman-app version').toString().trim();
+      } catch (e) {
+        return null;
+      }
+    });
   }
 }
