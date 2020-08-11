@@ -246,7 +246,7 @@ export class Init implements Command {
    * 拷贝模板
    */
   private async generate(templateName: string) {
-    let appPackage = await import(path.join(process.cwd(), 'package.json'));
+    let appPackage = (await import(path.join(process.cwd(), 'package.json'))).default;
 
     const templatePath = path.dirname(
       require.resolve(`${templateName}/package.json`, { paths: [process.cwd()] }),
@@ -263,9 +263,9 @@ export class Init implements Command {
 
     const templateJsonPath = path.join(templatePath, 'template.json');
 
-    let templateJson = {};
+    let templateJson: Record<string, any> = {};
     if (fs.existsSync(templateJsonPath)) {
-      templateJson = await import(templateJsonPath);
+      templateJson = (await import(templateJsonPath)).default;
     }
 
     appPackage = { ...appPackage, ...templateJson };
