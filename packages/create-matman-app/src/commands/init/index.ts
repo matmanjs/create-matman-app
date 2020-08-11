@@ -131,8 +131,7 @@ export class Init implements Command {
    * 安装模板
    */
   private async run() {
-    const name = this.context['project-name'] as string;
-    const root = path.resolve(name);
+    const root = path.resolve();
 
     const templateToInstall = await InitUtil.getTemplateInstallPackage(
       this.originalDirectory,
@@ -159,7 +158,8 @@ export class Init implements Command {
 
       // 错误退出时删除一些文件
       const knownGeneratedFiles = ['package.json', 'yarn.lock', 'node_modules'];
-      const currentFiles = fs.readdirSync(path.join(root));
+      const currentFiles = fs.readdirSync(root);
+
       currentFiles.forEach((file) => {
         knownGeneratedFiles.forEach((fileToMatch) => {
           if (file === fileToMatch) {
@@ -190,8 +190,7 @@ export class Init implements Command {
    * @param dependencies
    */
   private async install(dependencies: string[]) {
-    const name = this.context['project-name'] as string;
-    const root = path.resolve(name);
+    const root = path.resolve();
     let command: string;
     let args: string[];
 
