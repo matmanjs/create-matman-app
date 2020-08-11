@@ -5,7 +5,7 @@ import chalk from 'chalk';
 import yargs from 'yargs';
 import { execCommands } from './commands';
 
-(async () => {
+(() => {
   // 验证 Node 版本信息
   const currentNodeVersion = process.versions.node;
   const semver = currentNodeVersion.split('.');
@@ -34,7 +34,7 @@ import { execCommands } from './commands';
           describe: '指定的文件夹名称',
           type: 'string',
         })
-        .option('template ', {
+        .option('template', {
           describe: '指定需要的模板',
           type: 'string',
         })
@@ -49,13 +49,13 @@ import { execCommands } from './commands';
   // 得到参数
   const params = program.parse();
 
-  try {
-    await execCommands(params, packageJson);
-  } catch (e) {
+  execCommands(params, packageJson).catch((e) => {
+    console.error(chalk.red('发生错误请参考:\n'));
+
     if (params.verbose) {
       console.error(e);
     } else {
       program.showHelp();
     }
-  }
+  });
 })();

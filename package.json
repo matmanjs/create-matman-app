@@ -3,6 +3,9 @@
     "packages/*"
   ],
   "scripts": {
+    "init": "rm -rf node_modules && npm install && npm run clean && npm run bootstrap",
+    "bootstrap": "lerna bootstrap",
+    "clean": "lerna clean --yes",
     "build": "lerna run build",
     "prepublishOnly": "npm run build"
   },

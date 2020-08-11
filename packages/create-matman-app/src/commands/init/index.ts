@@ -1,6 +1,9 @@
 import path from 'path';
+import os from 'os';
+import fs from 'fs-extra';
 import semver from 'semver';
 import chalk from 'chalk';
+import spawn from 'cross-spawn';
 import { execSync } from 'child_process';
 import { InitUtil } from './utils';
 import { Command, collectCommands } from '../index';
@@ -12,6 +15,8 @@ export class Init implements Command {
 
   private packageJson: any;
 
+  private originalDirectory = '';
+
   constructor(context: ArgsParsered, packageJson: any) {
     this.context = context;
     this.packageJson = packageJson;
@@ -21,14 +26,8 @@ export class Init implements Command {
    * 实现接口
    */
   async exec() {
-    // 检查版本
-    const latest = await InitUtil.checkForLatestVersion().catch(() => {
-      try {
-        return execSync('npm view create-matman-app version').toString().trim();
-      } catch (e) {
-        return null;
-      }
-    });
+    // 检查本体版本
+    const latest = await InitUtil.checkForLatestVersion();
 
     // 检查失败或者版本过低
     if (latest && semver.lt(this.packageJson.version, latest as string)) {
@@ -49,17 +48,178 @@ export class Init implements Command {
       process.exit(1);
     }
 
-    this.createApp();
+    return this.createApp();
   }
 
   /**
    * 创建 app 的主要方法
+   * 检查各种依赖与冲突以及工具的合法性
    */
-  createApp() {
-    const root = path.resolve(this.context['project-name'] as string);
+  private createApp() {
+    const name = this.context['project-name'] as string;
+    const root = path.resolve(name);
     const appName = path.basename(root);
 
     // 检查名称合法性
     InitUtil.checkAppName(appName);
+
+    // 创建文件夹
+    fs.ensureDirSync(name);
+
+    // 检查文件夹中的文件
+    InitUtil.isSafeToCreateProjectIn(root, name);
+
+    console.log();
+    console.log(`在 ${chalk.green(root)} 中创建一个新的 Matman app.`);
+    console.log();
+
+    // 写入 package.json
+    const packageJson = {
+      name: appName,
+      version: '0.1.0',
+      private: true,
+    };
+
+    fs.writeFileSync(
+      path.join(root, 'package.json'),
+      JSON.stringify(packageJson, null, 2) + os.EOL,
+    );
+
+    const useYarn = this.context['use-yarn'] ? InitUtil.shouldUseYarn() : false;
+    // 同步到类成员中
+    this.context['use-yarn'] = useYarn;
+
+    // 改变命令运行文件夹
+    this.originalDirectory = process.cwd();
+    process.chdir(root);
+
+    if (!useYarn && !InitUtil.checkThatNpmCanReadCwd()) {
+      process.exit(1);
+    }
+
+    // 检查 npm 或者 yarn
+    if (!useYarn) {
+      const npmInfo = InitUtil.checkNpmVersion();
+
+      if (!npmInfo.hasMinNpm) {
+        if (npmInfo.npmVersion) {
+          console.log(chalk.yellow(`你整在使用的 NPM 版本为 ${npmInfo.npmVersion}.\n`));
+          console.log(chalk.yellow('请将 NPM 升级到 6.x 或者更高.'));
+        }
+      }
+    }
+
+    if (useYarn) {
+      let yarnUsesDefaultRegistry = true;
+      try {
+        yarnUsesDefaultRegistry =
+          execSync('yarnpkg config get registry').toString().trim() ===
+          'https://registry.yarnpkg.com';
+      } catch (e) {
+        // ignore
+      }
+
+      if (yarnUsesDefaultRegistry) {
+        fs.copySync(require.resolve('./yarn.lock.cached'), path.join(root, 'yarn.lock'));
+      }
+    }
+
+    return this.run();
+  }
+
+  /**
+   * 安装模板
+   */
+  private async run() {
+    const name = this.context['project-name'] as string;
+    const root = path.resolve(name);
+
+    const templateToInstall = await InitUtil.getTemplateInstallPackage(
+      this.originalDirectory,
+      this.context.template,
+    );
+
+    console.log('安装依赖包, 这可能会花费几分钟的时间.');
+
+    const templateInfo = await InitUtil.getPackageInfo(templateToInstall);
+
+    console.log(`安装模板 ${chalk.cyan(templateInfo.name)} ...`);
+    console.log();
+
+    return this.install([templateToInstall]).catch((reason) => {
+      console.error();
+      console.error('Aborting installation.');
+      if (reason.command) {
+        console.error(`  ${chalk.cyan(reason.command)} has failed.`);
+      } else {
+        console.error(chalk.red('意料之外的错误, 请报告这个问题:'));
+        console.error(reason);
+      }
+      console.error();
+
+      // 错误退出时删除一些文件
+      const knownGeneratedFiles = ['package.json', 'yarn.lock', 'node_modules'];
+      const currentFiles = fs.readdirSync(path.join(root));
+      currentFiles.forEach((file) => {
+        knownGeneratedFiles.forEach((fileToMatch) => {
+          if (file === fileToMatch) {
+            console.error(`Deleting generated file... ${chalk.cyan(file)}`);
+            fs.removeSync(path.join(root, file));
+          }
+        });
+      });
+
+      // 如果文件夹为空, 删除文件夹
+      const remainingFiles = fs.readdirSync(path.join(root));
+      if (!remainingFiles.length) {
+        console.error(
+          `Deleting ${chalk.blue(this.context['project-name'])} from ${chalk.cyan(
+            path.resolve(root, '..'),
+          )}`,
+        );
+        process.chdir(path.resolve(root, '..'));
+        fs.removeSync(path.join(root));
+      }
+      console.error('Done.');
+      process.exit(1);
+    });
+  }
+
+  /**
+   * 安装模板
+   * @param dependencies
+   */
+  private async install(dependencies: string[]) {
+    const name = this.context['project-name'] as string;
+    const root = path.resolve(name);
+    let command: string;
+    let args: string[];
+
+    if (this.context['use-yarn']) {
+      command = 'yarnpkg';
+      args = ['add', '--exact'];
+      args.concat(dependencies);
+      args.push('--cwd');
+      args.push(root);
+    } else {
+      command = 'npm';
+      args = ['install', '--save', '--save-exact', '--loglevel', 'error'].concat(dependencies);
+    }
+
+    if (this.context.verbose) {
+      args.push('--verbose');
+    }
+
+    return new Promise((resolve, reject) => {
+      const child = spawn(command, args, { stdio: 'inherit' });
+
+      child.on('close', (code) => {
+        if (code !== 0) {
+          // eslint-disable-next-line prefer-promise-reject-errors
+          reject({ command: `${command} ${args.join(' ')}` });
+        }
+        resolve();
+      });
+    });
   }
 }

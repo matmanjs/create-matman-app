@@ -35,7 +35,7 @@ export async function execCommands(context: ArgsParsered, packageJson: any) {
   const Method = commandsConstructor[command];
 
   if (Method) {
-    new Method(context, packageJson).exec();
+    await new Method(context, packageJson).exec();
   } else {
     throw new Error('命令不存在');
   }
