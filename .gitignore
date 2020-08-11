@@ -1,3 +1,4 @@
 node_modules
 lib
 *-debug.log
+.DS_Store

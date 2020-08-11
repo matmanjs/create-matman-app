@@ -146,12 +146,19 @@ export class Init implements Command {
     console.log();
 
     return this.install([templateToInstall])
-      .then(() => this.generate())
+      .then(() => this.generate(templateInfo.name))
       .then(() => {
         console.log();
         console.log(`卸载模板 ${chalk.cyan(templateInfo.name)} ...`);
+        console.log();
 
         return this.uninstall([templateInfo.name]);
+      })
+      .then(() => {
+        console.log();
+        console.log(chalk.green('初始化成功'));
+        console.log('🚗🚗🚗🚗', chalk.green('快乐开发, 从我开始'));
+        console.log();
       })
       .catch((reason) => {
         console.error();
@@ -238,9 +245,37 @@ export class Init implements Command {
   /**
    * 拷贝模板
    */
-  private generate() {
-    console.log('generate', this.context);
-    return Promise.resolve();
+  private async generate(templateName: string) {
+    let appPackage = await import(path.join(process.cwd(), 'package.json'));
+
+    const templatePath = path.dirname(
+      require.resolve(`${templateName}/package.json`, { paths: [process.cwd()] }),
+    );
+
+    // 有 init 脚本时执行脚本
+    const initJsPath = path.join(templatePath, 'init.js');
+    if (fs.existsSync(initJsPath)) {
+      const initJs = await import(initJsPath);
+      initJs({ ...this.context });
+
+      return;
+    }
+
+    const templateJsonPath = path.join(templatePath, 'template.json');
+
+    let templateJson = {};
+    if (fs.existsSync(templateJsonPath)) {
+      templateJson = await import(templateJsonPath);
+    }
+
+    appPackage = { ...appPackage, ...templateJson };
+
+    fs.writeFileSync(
+      path.join(process.cwd(), 'package.json'),
+      JSON.stringify(appPackage, null, 2) + os.EOL,
+    );
+
+    fs.copySync(path.join(templatePath, 'template'), process.cwd());
   }
 
   /**
