@@ -13,7 +13,7 @@ create-matman-app 适用于 macOS、Windows 和 Linux。
 ## 快速开始
 
 ```sh
-$ npx create-react-app new my-app
+$ npx create-matman-app new my-app
 $ cd my-app
 $ npm test
 ```
