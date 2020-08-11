@@ -128,7 +128,7 @@ export class Init implements Command {
   }
 
   /**
-   * 安装模板
+   * 安装模板等, 进行流程组装
    */
   private async run() {
     const root = path.resolve();
@@ -145,44 +145,57 @@ export class Init implements Command {
     console.log(`安装模板 ${chalk.cyan(templateInfo.name)} ...`);
     console.log();
 
-    return this.install([templateToInstall]).catch((reason) => {
-      console.error();
-      console.error('Aborting installation.');
-      if (reason.command) {
-        console.error(`  ${chalk.cyan(reason.command)} has failed.`);
-      } else {
-        console.error(chalk.red('意料之外的错误, 请报告这个问题:'));
-        console.error(reason);
-      }
-      console.error();
+    return this.install([templateToInstall])
+      .then(() => this.generate())
+      .then(() => {
+        console.log();
+        console.log(`卸载模板 ${chalk.cyan(templateInfo.name)} ...`);
 
-      // 错误退出时删除一些文件
-      const knownGeneratedFiles = ['package.json', 'yarn.lock', 'node_modules'];
-      const currentFiles = fs.readdirSync(root);
+        return this.uninstall([templateInfo.name]);
+      })
+      .catch((reason) => {
+        console.error();
+        console.error('Aborting installation.');
+        if (reason.command) {
+          console.error(`  ${chalk.cyan(reason.command)} has failed.`);
+        } else {
+          console.error(chalk.red('意料之外的错误, 请报告这个问题:'));
+          console.error(reason);
+        }
+        console.error();
 
-      currentFiles.forEach((file) => {
-        knownGeneratedFiles.forEach((fileToMatch) => {
-          if (file === fileToMatch) {
-            console.error(`Deleting generated file... ${chalk.cyan(file)}`);
-            fs.removeSync(path.join(root, file));
-          }
+        // 错误退出时删除一些文件
+        const knownGeneratedFiles = [
+          'package.json',
+          'yarn.lock',
+          'node_modules',
+          'package-lock.json',
+        ];
+        const currentFiles = fs.readdirSync(root);
+
+        currentFiles.forEach((file) => {
+          knownGeneratedFiles.forEach((fileToMatch) => {
+            if (file === fileToMatch) {
+              console.error(`Deleting generated file... ${chalk.cyan(file)}`);
+              fs.removeSync(path.join(root, file));
+            }
+          });
         });
-      });
 
-      // 如果文件夹为空, 删除文件夹
-      const remainingFiles = fs.readdirSync(path.join(root));
-      if (!remainingFiles.length) {
-        console.error(
-          `Deleting ${chalk.blue(this.context['project-name'])} from ${chalk.cyan(
-            path.resolve(root, '..'),
-          )}`,
-        );
-        process.chdir(path.resolve(root, '..'));
-        fs.removeSync(path.join(root));
-      }
-      console.error('Done.');
-      process.exit(1);
-    });
+        // 如果文件夹为空, 删除文件夹
+        const remainingFiles = fs.readdirSync(path.join(root));
+        if (!remainingFiles.length) {
+          console.error(
+            `Deleting ${chalk.blue(this.context['project-name'])} from ${chalk.cyan(
+              path.resolve(root, '..'),
+            )}`,
+          );
+          process.chdir(path.resolve(root, '..'));
+          fs.removeSync(path.join(root));
+        }
+        console.error('Done.');
+        process.exit(1);
+      });
   }
 
   /**
@@ -203,6 +216,50 @@ export class Init implements Command {
     } else {
       command = 'npm';
       args = ['install', '--save', '--save-exact', '--loglevel', 'error'].concat(dependencies);
+    }
+
+    if (this.context.verbose) {
+      args.push('--verbose');
+    }
+
+    return new Promise((resolve, reject) => {
+      const child = spawn(command, args, { stdio: 'inherit' });
+
+      child.on('close', (code) => {
+        if (code !== 0) {
+          // eslint-disable-next-line prefer-promise-reject-errors
+          reject({ command: `${command} ${args.join(' ')}` });
+        }
+        resolve();
+      });
+    });
+  }
+
+  /**
+   * 拷贝模板
+   */
+  private generate() {
+    console.log('generate', this.context);
+    return Promise.resolve();
+  }
+
+  /**
+   * 卸载模板
+   */
+  private uninstall(dependencies: string[]) {
+    const root = path.resolve();
+    let command: string;
+    let args: string[];
+
+    if (this.context['use-yarn']) {
+      command = 'yarnpkg';
+      args = ['remove', '--exact'];
+      args.concat(dependencies);
+      args.push('--cwd');
+      args.push(root);
+    } else {
+      command = 'npm';
+      args = ['uninstall'].concat(dependencies);
     }
 
     if (this.context.verbose) {
