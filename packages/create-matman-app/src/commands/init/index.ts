@@ -252,28 +252,29 @@ export class Init implements Command {
       require.resolve(`${templateName}/package.json`, { paths: [process.cwd()] }),
     );
 
-    // 有 init 脚本时执行脚本
-    const initJsPath = path.join(templatePath, 'init.js');
-    if (fs.existsSync(initJsPath)) {
-      const initJs = await import(initJsPath);
-      initJs({ ...this.context });
-
-      return;
-    }
-
+    // 写入 package.json
     const templateJsonPath = path.join(templatePath, 'template.json');
 
-    let templateJson: Record<string, any> = {};
+    let templateJson: Record<string, any> = { package: {} };
     if (fs.existsSync(templateJsonPath)) {
       templateJson = (await import(templateJsonPath)).default;
     }
 
-    appPackage = { ...appPackage, ...templateJson };
+    appPackage = { ...appPackage, ...templateJson.package };
 
     fs.writeFileSync(
       path.join(process.cwd(), 'package.json'),
       JSON.stringify(appPackage, null, 2) + os.EOL,
     );
+
+    // 有 init 脚本时执行脚本
+    const initJsPath = path.join(templatePath, 'init.js');
+    if (fs.existsSync(initJsPath)) {
+      const initJs = (await import(initJsPath)).default;
+      initJs({ ...this.context });
+
+      return;
+    }
 
     fs.copySync(path.join(templatePath, 'template'), process.cwd());
   }
