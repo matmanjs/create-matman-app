@@ -1,6 +1,6 @@
 # create-matman-app
 
-![](https://img.shields.io/github/languages/top/matmanjs/create-matman-app)![](https://img.shields.io/github/license/matmanjs/create-matman-app)
+![](https://img.shields.io/github/languages/top/matmanjs/create-matman-app) ![](https://img.shields.io/github/license/matmanjs/create-matman-app)
 
 创建一个 matman 应用，或者你可以添加自己的模板进行创造。
 
@@ -28,15 +28,57 @@ $ yarn global remove create-matman-app
 
 ## 子命令与参数
 
+> 目前只有 new 与 info 两个子命令
 
+### 全局参数
+
+- `--help`：显示帮助信息
+- `--version`：显示 CLI 工具版本
+- `--verbose`：打印详细日志
+
+### new
+
+#### 必需字段
+
+```bash
+$ create-matman-app new <project-name> [options]
+```
+
+- project-name 为必需字段，指定文件夹名称
+
+#### 参数
+
+- `--template`：指定需要的模板
+- `--use-yarn`：强制使用 YARN
+
+### info
+
+`info` 命令将答应你的工作环境，如下：
+
+```bash
+➜  ~ create-matman-app info
+
+Environment Info:
+
+  current version of create-matman-app: 0.0.2
+  running from ~/Documents/Project/create-matman-app/packages/create-matman-app
+
+  System:
+    OS: macOS 10.15.6
+    CPU: (8) x64 Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz
+  Binaries:
+    Node: 12.16.3 - ~/.nvm/versions/node/v12.16.3/bin/node
+    Yarn: Not Found
+    npm: 6.14.7 - ~/.nvm/versions/node/v12.16.3/bin/npm
+```
 
 ## 自定义模板
 
 自定义模板允许你可以从自己的模板创建应用，并且保留 create-matman-app 的全部功能。
 
-自定义模板应该以 `cra-template-[template-name]` 命名并发布在 NPM 上，但是其实你只需要向 create-matman-app `[template-name]`，便可以执行安装。
+自定义模板应该以 `cma-template-[template-name]` 命名并发布在 NPM 上，但是其实你只需要向 create-matman-app `[template-name]`，便可以执行安装。
 
-我们同样支持私有域的 NPM 包进行安装，命名可以是下面这些：`@[scope-name]/cra-template`、`@[scope-name]/cra-template-[template-name]`、`@[scope]`、`@[scope]/[template-name]`。
+我们同样支持私有域的 NPM 包进行安装，命名可以是下面这些：`@[scope-name]/cma-template`、`@[scope-name]/cma-template-[template-name]`、`@[scope]`、`@[scope]/[template-name]`。
 
 ```sh
 npx create-matman-app my-app --template [template-name]
@@ -58,7 +100,7 @@ npx create-matman-app my-app --template [template-name]
 模板必须具有以下结构：
 
 ```bash
-cra-template-[template-name]/
+cma-template-[template-name]/
   README.md (for npm)
   template.json
   package.json
@@ -77,7 +119,7 @@ cra-template-[template-name]/
 若要在本地测试，请使用 `file://` 前缀将文件路径传递给 create-matman-app。
 
 ```sh
-npx create-matman-app my-app --template file:../path/to/your/template/cra-template-[template-name]
+npx create-matman-app my-app --template file:../path/to/your/template/cma-template-[template-name]
 ```
 
 #### 文件夹 `template`
