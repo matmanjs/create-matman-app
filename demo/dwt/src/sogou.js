@@ -1,6 +1,6 @@
 const _ = require('lodash');
 
-fetch('https://www.sogou.com/cgi-bin/a/b/demo_cgi')
+fetch('/cgi-bin/a/b/demo_cgi')
   .then((result) => {
     return result.json();
   })
@@ -8,7 +8,7 @@ fetch('https://www.sogou.com/cgi-bin/a/b/demo_cgi')
     console.log(jsonData);
 
     // 修改消息
-    document.querySelector('#msg').innerText = _.trim(jsonData.result.description);
+    document.querySelector('#msg').innerText = _.concat('来自接口返回：',jsonData.result.description).join(' ');
 
     // 追加 DOM
     const newDiv = document.createElement('div');

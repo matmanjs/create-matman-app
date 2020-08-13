@@ -9,7 +9,7 @@ const { getDevRules } = require('../index');
  * @param {Function} [util.existsPlugin] 判断指定的 whistle 插件是否存在，接受一个 name 参数，返回一个 Boolean 值
  */
 module.exports = (cb, util) => {
-  console.log(`即将动态设置 whistle 规则（ whistle 端口号为 ${util.port}）...`);
+  console.log(`即将动态设置 whistle 规则（ http://127.0.0.1:${util.port}）...`);
 
   const result = getDevRules();
 

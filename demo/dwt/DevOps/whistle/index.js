@@ -45,8 +45,8 @@ function getDevRules(opts = {}) {
   // 注意：如果涉及到正则表达式，则 \ 需要修改为 \\ (用两个反斜杠)，否则自动设置到 whistle 时会被丢失
   const ruleList = [
     `www.sogou.com/cgi-bin/a/b/demo_cgi 127.0.0.1:${mockstarPort}`,
-    `www.sogou.com/sogou1.html ${projectRootPath}/src/sogou1.html`,
-    `www.sogou.com/sogou2.html ${projectRootPath}/src/sogou2.html`,
+    `www.sogou.com/sogou.html ${projectRootPath}/build/sogou.html`,
+    `www.sogou.com/sogou.dev.bundle.js ${projectRootPath}/build/sogou.dev.bundle.js`,
   ];
 
   return {
@@ -79,8 +79,8 @@ function getProdRules(opts = {}) {
   // 注意：如果涉及到正则表达式，则 \ 需要修改为 \\ (用两个反斜杠)，否则自动设置到 whistle 时会被丢失
   const ruleList = [
     `www.sogou.com/cgi-bin/a/b/demo_cgi 127.0.0.1:${mockstarPort}`,
-    `www.sogou.com/sogou1.html ${projectRootPath}/src/sogou1.html`,
-    `www.sogou.com/sogou2.html ${projectRootPath}/src/sogou2.html`,
+    `www.sogou.com/sogou.html ${projectRootPath}/build/sogou.html`,
+    `www.sogou.com/sogou.prod.bundle.js ${projectRootPath}/build/sogou.prod.bundle.js`,
   ];
 
   return {
