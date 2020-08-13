@@ -286,6 +286,16 @@ export class Init implements Command {
         const temp = item.replace(/gitignore/, '.gitignore');
         fs.copySync(path.join(templatePath, 'template', item), path.join(process.cwd(), temp));
       });
+
+    glob
+      .sync('**/gitignore', {
+        dot: true,
+        cwd: process.cwd(),
+        ignore: '**/node_modules/**',
+      })
+      .forEach((item) => {
+        fs.removeSync(path.join(process.cwd(), item));
+      });
   }
 
   /**
