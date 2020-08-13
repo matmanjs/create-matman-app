@@ -1,4 +1,4 @@
 node_modules
-lib
+packages/**/lib
 *-debug.log
 .DS_Store
