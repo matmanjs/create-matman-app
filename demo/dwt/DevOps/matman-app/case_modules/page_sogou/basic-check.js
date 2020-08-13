@@ -16,22 +16,17 @@ module.exports = async (pageDriverOpts) => {
   });
 
   // 设置页面地址
-  await pageDriver.setPageUrl('https://www.sogou.com');
+  await pageDriver.setPageUrl('https://www.sogou.com/sogou.html');
 
   // 第一步：开始操作之前，等待页面加载完成
   await pageDriver.addAction('init', async page => {
-    await page.waitFor('#stb');
+    await page.waitFor('#btn');
   });
 
-  // 第二步：搜索输入框输入: matman
-  await pageDriver.addAction('input_key_word', async page => {
-    await page.type('#query', 'matman');
-  });
-
-  // 第三步：点击搜索按钮，获得搜索结果
-  await pageDriver.addAction('click_to_search', async page => {
-    await page.click('#stb');
-    await page.waitFor('#main');
+  // 第二步：点击按钮
+  await pageDriver.addAction('click', async page => {
+    await page.click('#btn');
+    await page.waitFor('.msg-loaded');
   });
 
   // 计算并返回结果

@@ -13,40 +13,57 @@ function getWebviewInfo() {
 }
 
 /**
- * 获得搜索请求的相关信息
+ * 获得打招呼信息
  */
-function getSearchReq() {
-  return {
-    searchBtnTxt: useJquery.getVal('#stb'),
-    searchKeyWorld: useJquery.getVal('#query'),
+function getSayHelloInfo() {
+  const result = {
+    isExist: useJquery.isExist('#say-hello'),
   };
+
+  if (result.isExist) {
+    result.wording = useJquery.getText('#say-hello h1');
+  }
+
+  return result;
 }
 
 /**
- * 获得搜索结果的相关信息
+ * 获得消息信息
  */
-function getSearchRsp() {
-  const searchResult = [];
-
-  $('.pt,.vrTitle', '#main .results').each(function () {
-    searchResult.push({
-      title: useJquery.getText($(this)),
-    });
-  });
-
-  return {
-    searchBtnTxt: useJquery.getVal('#searchBtn'),
-    searchKeyWorld: useJquery.getVal('#upquery'),
-    searchNumTips: useJquery.getText('#main .search-info .num-tips'),
-    searchResult,
-
+function getMsgInfo() {
+  const result = {
+    isExist: useJquery.isExist('#msg'),
   };
+
+  if (result.isExist) {
+    result.wording = useJquery.getText('#msg');
+    result.isSuccess = $('#msg').hasClass('alert-success');
+    result.isLoaded = $('#msg').hasClass('msg-loaded');
+  }
+
+  return result;
+}
+
+/**
+ * 获得按钮信息
+ */
+function getBtnInfo() {
+  const result = {
+    isExist: useJquery.isExist('#btn'),
+  };
+
+  if (result.isExist) {
+    result.wording = useJquery.getText('#btn');
+  }
+
+  return result;
 }
 
 module.exports = () => {
   return {
     webviewInfo: getWebviewInfo(),
-    searchReq: getSearchReq(),
-    searchRsp: getSearchRsp(),
+    sayHelloInfo: getSayHelloInfo(),
+    msgInfo: getMsgInfo(),
+    btnInfo: getBtnInfo(),
   };
 };

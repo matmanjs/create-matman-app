@@ -2,17 +2,17 @@
   "name": "simple",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "lodash": "^4.17.19",
-    "matman": "^6.0.15",
-    "matman-runner-puppeteer": "^6.0.15",
-    "web-crawl-util": "^1.0.2"
-  },
   "scripts": {
     "build": "matman build",
     "build-dev": "matman build --dev",
     "test": "mocha",
     "test:show": "cross-env SHOW_BROWSER=1 npm run test"
+  },
+  "dependencies": {
+    "lodash": "^4.17.19",
+    "matman": "^6.0.15",
+    "matman-runner-puppeteer": "^6.0.15",
+    "web-crawl-util": "^1.0.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
