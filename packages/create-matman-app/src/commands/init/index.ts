@@ -4,6 +4,7 @@ import fs from 'fs-extra';
 import semver from 'semver';
 import chalk from 'chalk';
 import spawn from 'cross-spawn';
+import glob from 'glob';
 import { execSync } from 'child_process';
 import { InitUtil } from './utils';
 import { Command, collectCommands } from '../index';
@@ -276,7 +277,14 @@ export class Init implements Command {
       return;
     }
 
-    fs.copySync(path.join(templatePath, 'template'), process.cwd());
+    glob
+      .sync('**/*', {
+        dot: true,
+        cwd: path.join(templatePath, 'template'),
+      })
+      .forEach((item) => {
+        fs.copySync(path.join(templatePath, 'template', item), path.join(process.cwd(), item));
+      });
   }
 
   /**

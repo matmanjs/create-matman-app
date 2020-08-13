@@ -1,5 +1,5 @@
 node_modules
-packages/**/lib
+packages/*/lib
 *-debug.log
 .DS_Store
 .idea
