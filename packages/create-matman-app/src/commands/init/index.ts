@@ -283,7 +283,8 @@ export class Init implements Command {
         cwd: path.join(templatePath, 'template'),
       })
       .forEach((item) => {
-        fs.copySync(path.join(templatePath, 'template', item), path.join(process.cwd(), item));
+        const temp = item.replace(/gitignore/, '.gitignore');
+        fs.copySync(path.join(templatePath, 'template', item), path.join(process.cwd(), temp));
       });
   }
 
