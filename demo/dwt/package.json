@@ -5,7 +5,8 @@
   "scripts": {
     "build-dev": "webpack --config webpack.dev.config.js",
     "build-prod": "webpack --config webpack.prod.config.js",
-    "test:e2e": "mocha test/e2e",
+    "test:e2e": "node test/run-e2e-test.js",
+    "test:e2e:direct": "mocha test/e2e",
     "test:e2e:show": "cross-env SHOW_BROWSER=1 npm run test:e2e"
   },
   "dependencies": {
@@ -16,6 +17,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "cross-env": "^7.0.2",
     "html-webpack-plugin": "^4.3.0",
+    "matman-e2e-test": "^1.0.1",
     "mocha": "^8.0.1",
     "mochawesome": "^6.1.1",
     "webpack": "^4.44.1",
