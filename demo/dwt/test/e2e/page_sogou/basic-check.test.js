@@ -33,7 +33,7 @@ describe('搜狗首页：点击获取信息', function () {
         },
         sayHelloInfo: {
           isExist: true,
-          wording: '',
+          wording: '你好，我不是 www.sogou.com',
         },
         msgInfo: {
           isExist: true,
@@ -71,7 +71,7 @@ describe('搜狗首页：点击获取信息', function () {
         },
         sayHelloInfo: {
           isExist: true,
-          wording: '',
+          wording: '你好，我不是 www.sogou.com',
         },
         msgInfo: {
           isExist: true,
