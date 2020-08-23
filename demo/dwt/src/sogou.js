@@ -16,6 +16,10 @@ function bindClickEvent() {
   });
 }
 
+function iAmNotCalled() {
+  console.log('I am not called!');
+}
+
 $(function () {
   console.log('jQuery loaded!');
 
