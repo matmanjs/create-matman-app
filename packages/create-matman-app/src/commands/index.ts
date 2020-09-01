@@ -36,9 +36,7 @@ export async function execCommands(context: ArgsParsered, packageJson: any) {
 
   if (Method) {
     await new Method(context, packageJson).exec();
-  } else {
-    // throw new Error('命令不存在');
-
+  } else if (command) {
     // 如果没有匹配的命令则默认为创建
     context._[0] = 'new';
     context['project-name'] = command;
@@ -46,6 +44,8 @@ export async function execCommands(context: ArgsParsered, packageJson: any) {
 
     const CmdNewMethod = commandsConstructor.new;
     await new CmdNewMethod(context, packageJson).exec();
+  } else {
+    throw new Error('命令不存在');
   }
 }
 

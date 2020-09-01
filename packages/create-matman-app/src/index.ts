@@ -28,7 +28,7 @@ import { execCommands } from './commands';
     .scriptName(packageJson.name)
     .version(packageJson.version)
     .usage(`$0 ${chalk.green('<command>')} [project-name|options]`)
-    .command('new <project-name> [options]', '新建一个 matman 模板', (y) => {
+    .command('<project-name> [options]', '新建一个 matman 模板', (y) => {
       return y
         .positional('project-name', {
           describe: '指定的文件夹名称',
@@ -40,11 +40,29 @@ import { execCommands } from './commands';
         })
         .option('use-yarn', { describe: '强制使用 YARN', type: 'boolean' });
     })
+    .command('new <project-name> [options]', '新建一个 matman 模板', (y) => {
+      return y
+        .positional('project-name', {
+          describe: '指定的文件夹名称',
+          type: 'string',
+        })
+        .option('template', {
+          describe: '指定模板，可选：mocha',
+          type: 'string',
+        })
+        .option('use-yarn', { describe: '强制使用 YARN', type: 'boolean' });
+    })
     .command('info', '打印环境信息')
     .option('verbose', {
       describe: '打印额外的 logs',
       type: 'boolean',
-    });
+    })
+    .option('template', {
+      describe: '指定模板，可选：mocha',
+      type: 'string',
+    })
+    .option('use-yarn', { describe: '强制使用 YARN', type: 'boolean' })
+    .epilogue('For more information, find our manual at https://matmanjs.github.io/matman/');
 
   // 得到参数
   const params = program.parse();
