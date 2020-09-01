@@ -14,6 +14,8 @@ export class InitUtil {
   static async checkForLatestVersion() {
     try {
       return await new Promise((resolve, reject) => {
+        let isReturn = false;
+
         https
           .get('https://registry.npmjs.org/-/package/create-matman-app/dist-tags', (res) => {
             if (res.statusCode === 200) {
@@ -27,11 +29,21 @@ export class InitUtil {
             } else {
               reject();
             }
+            isReturn = true;
           })
           .on('error', () => {
+            isReturn = true;
             reject();
           });
+
+        setTimeout(() => {
+          if (!isReturn) {
+            isReturn = true;
+            reject(new Error('Timeout!!'));
+          }
+        }, 2000);
       });
+
     } catch (e) {
       try {
         return execSync('npm view create-matman-app version').toString().trim();
@@ -73,10 +85,10 @@ export class InitUtil {
       console.error(
         chalk.red(
           `因为同名依赖必须被安装, 不能创建叫做 ${chalk.green(appName)} 的包.\n` +
-            `因为 npm 的工作方式, 下面这些名称不被允许:\n\n`,
+          `因为 npm 的工作方式, 下面这些名称不被允许:\n\n`,
         ) +
-          chalk.cyan(dependencies.map((depName) => `  ${depName}`).join('\n')) +
-          chalk.red('\n\n请选择一个不同的名称.'),
+        chalk.cyan(dependencies.map((depName) => `  ${depName}`).join('\n')) +
+        chalk.red('\n\n请选择一个不同的名称.'),
       );
       process.exit(1);
     }

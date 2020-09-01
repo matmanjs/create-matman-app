@@ -1,7 +1,7 @@
 import { ArgsParsered } from '../types';
 
 interface CommandConstructor {
-  new (context: ArgsParsered, packageJson: any): Command;
+  new(context: ArgsParsered, packageJson: any): Command;
 }
 
 /**
@@ -37,7 +37,15 @@ export async function execCommands(context: ArgsParsered, packageJson: any) {
   if (Method) {
     await new Method(context, packageJson).exec();
   } else {
-    throw new Error('命令不存在');
+    // throw new Error('命令不存在');
+
+    // 如果没有匹配的命令则默认为创建
+    context._[0] = 'new';
+    context['project-name'] = command;
+    context.projectName = command;
+
+    const CmdNewMethod = commandsConstructor.new;
+    await new CmdNewMethod(context, packageJson).exec();
   }
 }
 

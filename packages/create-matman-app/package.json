@@ -2,6 +2,10 @@
   "name": "create-matman-app",
   "version": "0.0.6",
   "description": "matman 脚手架工具",
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "tsc -d"
+  },
   "keywords": [
     "test",
     "e2e",
@@ -29,10 +33,6 @@
     "type": "git",
     "url": "git+https://github.com/matmanjs/create-matman-app.git"
   },
-  "scripts": {
-    "build": "tsc",
-    "test": "echo \"Error: run tests from root\" && exit 1"
-  },
   "bugs": {
     "url": "https://github.com/matmanjs/create-matman-app/issues"
   },
@@ -53,6 +53,8 @@
     "@types/semver": "^7.3.1",
     "@types/tmp": "^0.2.0",
     "@types/validate-npm-package-name": "^3.0.0",
-    "@types/yargs": "^15.0.5"
+    "@types/yargs": "^15.0.5",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.6"
   }
 }

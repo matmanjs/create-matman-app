@@ -7,7 +7,7 @@ import spawn from 'cross-spawn';
 import glob from 'glob';
 import { execSync } from 'child_process';
 import { InitUtil } from './utils';
-import { Command, collectCommands } from '../index';
+import { collectCommands, Command } from '../index';
 import { ArgsParsered } from '../../types';
 
 @collectCommands('new')
@@ -36,14 +36,14 @@ export class Init implements Command {
       console.error(
         chalk.yellow(
           `你正在使用 \`create-matman-app\` ${this.packageJson.version}, 最新版本为 (${latest}).\n\n` +
-            '我们不推荐将 create-matman-app 作为全局依赖',
+          '我们不推荐将 create-matman-app 作为全局依赖',
         ),
       );
       console.log();
       console.log(
         '请通过下面的命令移除全局依赖:\n' +
-          '- npm uninstall -g create-matman-app\n' +
-          '- yarn global remove create-matman-app',
+        '- npm uninstall -g create-matman-app\n' +
+        '- yarn global remove create-matman-app',
       );
       console.log();
       process.exit(1);
