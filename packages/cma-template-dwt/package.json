@@ -14,7 +14,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/matmanjs/create-matman-app.git"
+    "url": "git+https://github.com/matmanjs/create-matman-app.git",
+    "directory": "packages/cma-template-dwt"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"

@@ -31,7 +31,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/matmanjs/create-matman-app.git"
+    "url": "git+https://github.com/matmanjs/create-matman-app.git",
+    "directory": "packages/create-matman-app"
   },
   "bugs": {
     "url": "https://github.com/matmanjs/create-matman-app/issues"
