@@ -10,10 +10,10 @@ whistle 官方文档： https://wproxy.org/whistle/ 。
 
 ``` 
 # 本地开发模式
-$ npm run start-dev
+$ npm run use-dev
 
 # 生产构建模式
-$ npm run start-prod
+$ npm run use-prod
 ```
 
 
