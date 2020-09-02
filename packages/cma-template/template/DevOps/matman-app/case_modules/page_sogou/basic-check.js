@@ -1,9 +1,10 @@
 const path = require('path');
 const { createPageDriver } = require('../../helpers');
+const { BASIC_QUERY_DATA_MAP, WAIT, PAGE_URL } = require('./env');
 
 module.exports = async (pageDriverOpts) => {
   // 创建 PageDriver 对象，使用它可以实现对浏览器页面的控制
-  const pageDriver = await createPageDriver(__filename, pageDriverOpts);
+  const pageDriver = await createPageDriver(__filename, pageDriverOpts, BASIC_QUERY_DATA_MAP);
 
   // 设置浏览器打开时所模拟的设备参数
   await pageDriver.setDeviceConfig({
@@ -16,22 +17,17 @@ module.exports = async (pageDriverOpts) => {
   });
 
   // 设置页面地址
-  await pageDriver.setPageUrl('https://www.sogou.com');
+  await pageDriver.setPageUrl('https://www.sogou.com/sogou.html');
 
   // 第一步：开始操作之前，等待页面加载完成
-  await pageDriver.addAction('init', async page => {
-    await page.waitFor('#stb');
+  await pageDriver.addAction('init', async (page) => {
+    await page.waitFor('#btn');
   });
 
-  // 第二步：搜索输入框输入: matman
-  await pageDriver.addAction('input_key_word', async page => {
-    await page.type('#query', 'matman');
-  });
-
-  // 第三步：点击搜索按钮，获得搜索结果
-  await pageDriver.addAction('click_to_search', async page => {
-    await page.click('#stb');
-    await page.waitFor('#main');
+  // 第二步：点击按钮
+  await pageDriver.addAction('click', async (page) => {
+    await page.click('#btn');
+    await page.waitFor('.msg-loaded');
   });
 
   // 计算并返回结果
