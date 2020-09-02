@@ -1,4 +1,4 @@
 reporter: 'mochawesome'
 reporterOptions:
-  - 'reportDir=.dwt_output/mochawesome'
+  - 'reportDir=.matman_output/mochawesome'
 recursive: true

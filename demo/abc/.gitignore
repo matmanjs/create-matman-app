@@ -61,4 +61,4 @@ typings/
 .DS_Store
 
 build
-.dwt_output
+.matman_output

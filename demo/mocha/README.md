@@ -1,9 +1,9 @@
 # create-matman-app 的 mocha 模板
 
-本项目是由 [create-matman-app](https://www.npmjs.com/package/create-matman-app) 的 mocha 模板初始化生成，相应的初始化命令如下：
+本项目是由 [create-matman-app](https://www.npmjs.com/package/create-matman-app) 的默认模板初始化生成，相应的初始化命令如下：
 
 ```
-$ npx create-matman-app matman-app --template=mocha
+$ npx create-matman-app matman-app
 ```
 
 ## 1. 项目介绍
@@ -83,3 +83,7 @@ $ npm run test:e2e:bootstrap
 # 使用 mocha 执行测试文件
 $ npm run test:e2e:direct
 ```
+
+## 3. 反馈
+
+更多文档请阅读 [官方指南](https://matmanjs.github.io/matman/) ，欢迎给我们 [提issue](https://github.com/matmanjs/matman/issues) 和 [star](https://github.com/matmanjs/matman) 。
