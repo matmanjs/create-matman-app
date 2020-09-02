@@ -8,7 +8,9 @@
     "bootstrap": "lerna bootstrap",
     "clean": "lerna clean --yes",
     "build": "lerna run build",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "publish": "git pull && lerna publish --cd-version patch",
+    "force-publish": "lerna publish --cd-version patch --force-publish=*"
   },
   "repository": {
     "type": "git",
