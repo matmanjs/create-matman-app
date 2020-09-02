@@ -2,7 +2,7 @@ const { expect } = require('chai');
 
 const checkPage = require('../../../DevOps/matman-app/case_modules/page_sogou/basic-check');
 
-describe('搜狗首页：点击获取信息(默认debug)', function () {
+describe('搜狗首页：点击获取信息(type=1)', function () {
   this.timeout(30000);
 
   let resultData;
@@ -12,6 +12,9 @@ describe('搜狗首页：点击获取信息(默认debug)', function () {
       show: false,
       doNotCloseBrowser: false,
       useRecorder: true,
+      queryDataMap: {
+        demo_cgi: 'success_js_module',
+      },
     });
   });
 
@@ -75,7 +78,7 @@ describe('搜狗首页：点击获取信息(默认debug)', function () {
         },
         msgInfo: {
           isExist: true,
-          wording: '来自接口返回： 我是 debug',
+          wording: '来自接口返回： 我是学生',
           isSuccess: true,
           isLoaded: true,
         },
@@ -87,7 +90,7 @@ describe('搜狗首页：点击获取信息(默认debug)', function () {
     });
 
     it('消息信息已更新为新信息', function () {
-      expect(data.msgInfo.wording).to.be.equal('来自接口返回： 我是 debug');
+      expect(data.msgInfo.wording).to.be.equal('来自接口返回： 我是学生');
     });
 
     it('消息信息类型：成功', function () {

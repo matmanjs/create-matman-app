@@ -10,8 +10,14 @@ function bindClickEvent() {
         console.log(jsonData);
 
         // 修改消息
-        $('#msg').text(_.concat('来自接口返回：', jsonData.result.description).join(' '));
-        $('#msg').removeClass('alert-info').addClass('alert-success').addClass('msg-loaded');
+        if (jsonData.retcode === 0) {
+          $('#msg').text(_.concat('来自接口返回：', jsonData.result.description).join(' '));
+          $('#msg').removeClass('alert-info').addClass('alert-success').addClass('msg-loaded');
+        } else {
+          $('#msg').text(_.concat('来自接口返回：', JSON.stringify(jsonData)).join(' '));
+          $('#msg').removeClass('alert-info').addClass('alert-danger').addClass('msg-loaded');
+        }
+
       });
   });
 }
