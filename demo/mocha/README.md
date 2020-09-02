@@ -3,7 +3,7 @@
 本项目是由 [create-matman-app](https://www.npmjs.com/package/create-matman-app) 的 mocha 模板初始化生成，相应的初始化命令如下：
 
 ```
-$ npx create-matman-app --template=mocha
+$ npx create-matman-app matman-app --template=mocha
 ```
 
 ## 1. 项目介绍
@@ -65,7 +65,7 @@ $ npm run test:e2e:show
 - 执行 `w2 start` 启动 whistle （需要全局安装 `npm install whistle -g`，默认代理服务地址：`http://127.0.0.1:8899`），同时设置好代理规则。在本例中，进入到 `DevOps/whistle` 目录下，执行 `npm run use-dev` 使用本地调试代理，执行 `npm run use-prod` 启动生产版本代理
 - 进入到 `DevOps/mockstar-app` 目录下，执行 `npm install` 安装依赖
 
-虽然步骤很多，但是如果你目前正处于开发阶段，那么这些步骤实际上已经被执行过了。
+> 虽然步骤很多，但是如果你目前正处于开发阶段，那么这些步骤实际上已经被执行过了。
 
 ##### 2.2.1.2 方式二：自动化脚本准备
 
