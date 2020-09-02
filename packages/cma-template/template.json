@@ -1,23 +1,29 @@
 {
   "package": {
+    "private": true,
     "scripts": {
-      "build": "matman build",
-      "build-dev": "matman build --dev",
-      "test": "mocha",
-      "test:show": "cross-env SHOW_BROWSER=1 npm run test"
+      "build-dev": "webpack --config webpack.dev.config.js",
+      "build-prod": "webpack --config webpack.prod.config.js",
+      "test:e2e": "node test/run-e2e-test.js",
+      "test:e2e:show": "cross-env SHOW_BROWSER=1 npm run test:e2e",
+      "test:e2e:direct": "mocha test/e2e",
+      "test:e2e:bootstrap": "node test/bootstrap-sut.js",
+      "test:e2e:bootstrap:dev": "node test/bootstrap-sut-dev.js"
     },
     "dependencies": {
-      "lodash": "^4.17.19",
-      "matman": "^6.0.15",
-      "matman-runner-puppeteer": "^6.0.15",
-      "web-crawl-util": "^1.0.2"
+      "lodash": "^4.17.19"
     },
     "devDependencies": {
       "chai": "^4.2.0",
+      "clean-webpack-plugin": "^3.0.0",
       "cross-env": "^7.0.2",
-      "matman-cli": "^6.0.15",
+      "html-webpack-plugin": "^4.3.0",
+      "istanbul-instrumenter-loader": "^3.0.1",
+      "matman-e2e-test": "^1.0.2",
       "mocha": "^8.0.1",
-      "mochawesome": "^6.1.1"
+      "mochawesome": "^6.1.1",
+      "webpack": "^4.44.1",
+      "webpack-cli": "^3.3.12"
     }
   }
 }
