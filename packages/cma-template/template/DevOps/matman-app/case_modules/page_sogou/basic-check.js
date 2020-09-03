@@ -1,6 +1,6 @@
 const path = require('path');
 const { createPageDriver } = require('../../helpers');
-const { BASIC_QUERY_DATA_MAP, WAIT, PAGE_URL } = require('./env');
+const { BASIC_QUERY_DATA_MAP } = require('./env');
 
 module.exports = async (pageDriverOpts) => {
   // 创建 PageDriver 对象，使用它可以实现对浏览器页面的控制
