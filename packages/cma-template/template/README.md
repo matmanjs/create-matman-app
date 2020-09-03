@@ -87,6 +87,42 @@ $ npm run test:e2e:bootstrap
 $ npm run test:e2e:direct
 ```
 
-## 3. 反馈
+## 3. 设置代理
+
+本项目提供的 `https://www.sogou.com/sogou.html` 页面并非实际存在页面，我们需要借助代理来访问，通过自定义自动化脚本来动态设置，也可以手动设置。
+
+### 3.1 方式一：动态设置代理
+
+推荐使用 [whistle](https://github.com/avwo/whistle) 来设置代理，运行如下命令自动设置代理，具体可以阅读 [DevOps/whistle/README.md](./DevOps/whistle/README.md) 。
+
+```
+# 开发场景
+$ npm run use-whistle-dev
+
+# 生产环境
+$ npm run use-whistle-prod
+```
+
+### 3.2 方式二：手动设置代理
+
+也可以自己手动设置，其中 `[project_path]` 为本地项目的绝对路径，需要按实际情况替换。
+
+场景一： 开发场景，代理如下：
+
+```
+www.sogou.com/cgi-bin/a/b/demo_cgi 127.0.0.1:9527
+www.sogou.com/sogou.html [project_path]/build/sogou.html
+www.sogou.com/sogou.dev.bundle.js [project_path]/build/sogou.dev.bundle.js
+```
+
+场景二： 生产环境，代理如下：
+
+```
+www.sogou.com/cgi-bin/a/b/demo_cgi 127.0.0.1:9527
+www.sogou.com/sogou.html [project_path]/build/sogou.html
+www.sogou.com/sogou.prod.bundle.js [project_path]/build/sogou.prod.bundle.js
+```
+
+## 4. 反馈
 
 更多文档请阅读 [官方指南](https://matmanjs.github.io/matman/) ，欢迎给我们 [提issue](https://github.com/matmanjs/matman/issues) 和 [star](https://github.com/matmanjs/matman) 。
