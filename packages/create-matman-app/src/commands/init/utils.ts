@@ -12,45 +12,57 @@ export class InitUtil {
    * 检查依赖的最新版本
    */
   static async checkForLatestVersion() {
-    try {
-      return await new Promise((resolve, reject) => {
-        let isReturn = false;
+    const packageName = 'create-matman-app';
 
-        https
-          .get('https://registry.npmjs.org/-/package/create-matman-app/dist-tags', (res) => {
+    // We first check the registry directly via the API, and if that fails, we try
+    // the slower `npm view [package] version` command.
+    //
+    // This is important for users in environments where direct access to npm is
+    // blocked by a firewall, and packages are provided exclusively via a private
+    // registry.
+    return new Promise((resolve, reject) => {
+      let isReturn = false;
+
+      https
+        .get(
+          'https://registry.npmjs.org/-/package/' + packageName + '/dist-tags',
+          res => {
             if (res.statusCode === 200) {
               let body = '';
-              res.on('data', (data) => {
-                body += data;
-              });
+              res.on('data', data => (body += data));
               res.on('end', () => {
                 resolve(JSON.parse(body).latest);
               });
             } else {
               reject();
             }
-            isReturn = true;
-          })
-          .on('error', () => {
-            isReturn = true;
-            reject();
-          });
 
-        setTimeout(() => {
-          if (!isReturn) {
             isReturn = true;
-            reject(new Error('Timeout!!'));
-          }
-        }, 2000);
-      });
+          },
+        )
+        .on('error', () => {
+          isReturn = true;
+          reject();
+        });
 
-    } catch (e) {
+      setTimeout(() => {
+        if (!isReturn) {
+          isReturn = true;
+          reject('Timeout!!');
+        }
+      }, 1500);
+
+    }).catch(() => {
       try {
-        return execSync('npm view create-matman-app version').toString().trim();
-      } catch (err) {
-        return null;
+        return execSync(`npm view ${packageName} version`, { timeout: 1500 }).toString().trim();
+      } catch (e) {
+        try {
+          return execSync(`tnpm view ${packageName} version`, { timeout: 1500 }).toString().trim();
+        } catch (e) {
+          return null;
+        }
       }
-    }
+    });
   }
 
   /**

@@ -27,8 +27,21 @@ export class Init implements Command {
    * 实现接口
    */
   async exec() {
+    console.log();
+    console.log(
+      `Welcome use ${chalk.green(this.packageJson.name)} ${chalk.green(
+        'v' + this.packageJson.version,
+      )} to creating a new Matman app.`,
+    );
+    console.log();
+
     // 检查本体版本
+    console.log('Checking latest version...');
+    const checkBeginT = Date.now();
     const latest = await InitUtil.checkForLatestVersion();
+    console.log(
+      `Check latest version complete(${(Date.now() - checkBeginT) / 1000}s) ! The latest version is ${chalk.green(latest)} .`,
+    );
 
     // 检查失败或者版本过低
     if (latest && semver.lt(this.packageJson.version, latest as string)) {
