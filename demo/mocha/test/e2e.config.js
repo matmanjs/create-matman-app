@@ -43,11 +43,11 @@ async function prepareSUT(e2eRunner, config = {}) {
     port: config.whistlePort,
     useCurrentStartedWhistle: config.useCurrentStartedWhistle,
     getWhistleRules: () => {
-      const opts = {
+      const getRulesOpts = {
         projectRootPath: e2eRunner.workspacePath,
         mockstarPort,
       }
-      return isBuildDev ? whistle.getDevRules(opts) : whistle.getProdRules(opts);
+      return config.isBuildDev ? whistle.getDevRules(getRulesOpts) : whistle.getProdRules(getRulesOpts);
     },
   });
 
