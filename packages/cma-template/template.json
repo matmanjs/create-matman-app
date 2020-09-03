@@ -6,6 +6,7 @@
       "build-prod": "webpack --config webpack.prod.config.js",
       "use-whistle-dev": "cd DevOps/whistle && npm run use-dev",
       "use-whistle-prod": "cd DevOps/whistle && npm run use-prod",
+      "test": "npm run test:e2e",
       "test:e2e": "node test/run-e2e-test.js",
       "test:e2e:show": "cross-env SHOW_BROWSER=1 npm run test:e2e",
       "test:e2e:direct": "mocha test/e2e",
