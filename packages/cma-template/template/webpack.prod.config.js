@@ -20,7 +20,7 @@ const webpackConfig = {
       filename: 'sogou.html',
       template: './public/sogou.html',
       templateParameters: {
-        buildVersionDesc: '构建版本：生成环境版本(webpack.prod.config.js)',
+        buildVersionDesc: '构建版本：生产环境版本(webpack.prod.config.js)',
       },
     }),
   ],
