@@ -11,7 +11,7 @@ export class InitUtil {
   /**
    * 检查依赖的最新版本
    */
-  static async checkForLatestVersion() {
+  static async checkForLatestVersion(): Promise<{ from: string, latest: string }> {
     const packageName = 'create-matman-app';
 
     // We first check the registry directly via the API, and if that fails, we try
@@ -20,49 +20,99 @@ export class InitUtil {
     // This is important for users in environments where direct access to npm is
     // blocked by a firewall, and packages are provided exclusively via a private
     // registry.
-    return new Promise((resolve, reject) => {
-      let isReturn = false;
-
-      https
-        .get(
+    const getFromHttp = new Promise((resolve) => {
+      // 注意，这里之所以要延时 2s，其实更希望是通过 npm 或 tnpm 等获得，以便后续知道拿谁来 instal
+      setTimeout(() => {
+        https.get(
           'https://registry.npmjs.org/-/package/' + packageName + '/dist-tags',
           res => {
             if (res.statusCode === 200) {
               let body = '';
               res.on('data', data => (body += data));
               res.on('end', () => {
-                resolve(JSON.parse(body).latest);
+                resolve({
+                  from: 'http',
+                  latest: JSON.parse(body).latest
+                });
               });
-            } else {
-              reject();
             }
+          })
+          .on('error', () => {
+            if (process.env.DEBUG) {
+              console.log('get error');
+            }
+          });
+      }, 2000);
+    });
 
-            isReturn = true;
-          },
-        )
-        .on('error', () => {
-          isReturn = true;
-          reject();
-        });
-
-      setTimeout(() => {
-        if (!isReturn) {
-          isReturn = true;
-          reject('Timeout!!');
-        }
-      }, 1500);
-
-    }).catch(() => {
+    const getFromNpm = new Promise((resolve) => {
       try {
-        return execSync(`npm view ${packageName} version`, { timeout: 1500 }).toString().trim();
+        const latest = execSync(`npm view ${packageName} version`, { timeout: 1500 }).toString().trim();
+
+        resolve({
+          from: 'npm',
+          latest
+        });
       } catch (e) {
-        try {
-          return execSync(`tnpm view ${packageName} version`, { timeout: 1500 }).toString().trim();
-        } catch (e) {
-          return null;
+        if (process.env.DEBUG) {
+          console.log(e);
         }
       }
     });
+
+    const getFromTNpm = new Promise((resolve) => {
+      try {
+        const latest = execSync(`tnpm view ${packageName} version`, { timeout: 1500 }).toString().trim();
+
+        resolve({
+          from: 'tnpm',
+          latest
+        });
+      } catch (e) {
+        if (process.env.DEBUG) {
+          console.log(e);
+        }
+      }
+    });
+
+    const getFromCNpm = new Promise((resolve) => {
+      try {
+        const latest = execSync(`cnpm view ${packageName} version`, { timeout: 1500 }).toString().trim();
+
+        resolve({
+          from: 'cnpm',
+          latest
+        });
+      } catch (e) {
+        if (process.env.DEBUG) {
+          console.log(e);
+        }
+      }
+    });
+
+    const getFromTimeout = new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          from: 'timeout',
+          latest: 'unknown'
+        });
+      }, 4000);
+    });
+
+    try {
+      return await Promise.race([
+        getFromHttp,
+        getFromNpm,
+        getFromTNpm,
+        getFromCNpm,
+        getFromTimeout
+      ]) as ({ from: string, latest: string });
+    } catch (e) {
+      return {
+        from: 'catch',
+        latest: 'unknown'
+      };
+    }
   }
 
   /**

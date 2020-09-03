@@ -18,9 +18,13 @@ export class Init implements Command {
 
   private originalDirectory = '';
 
+  private NPM: string;
+
   constructor(context: ArgsParsered, packageJson: any) {
     this.context = context;
     this.packageJson = packageJson;
+
+    this.NPM = 'npm';
   }
 
   /**
@@ -38,10 +42,15 @@ export class Init implements Command {
     // 检查本体版本
     console.log('Checking latest version...');
     const checkBeginT = Date.now();
-    const latest = await InitUtil.checkForLatestVersion();
+    const { latest, from } = await InitUtil.checkForLatestVersion();
     console.log(
-      `Check latest version complete(${(Date.now() - checkBeginT) / 1000}s) ! The latest version is ${chalk.green(latest)} .`,
+      `Check latest version complete(${(Date.now() - checkBeginT) / 1000}s by ${from}) ! The latest version is ${chalk.green(latest)} .`,
     );
+
+    // 修改用哪个来 install
+    if (['npm', 'tnpm', 'cnpm'].indexOf(from) > -1) {
+      this.NPM = from;
+    }
 
     // 检查失败或者版本过低
     if (latest && semver.lt(this.packageJson.version, latest as string)) {
@@ -235,7 +244,7 @@ export class Init implements Command {
       args.push('--cwd');
       args.push(root);
     } else {
-      command = 'npm';
+      command = this.NPM || 'npm';
       args = ['install', '--save', '--save-exact', '--loglevel', 'error'].concat(dependencies);
     }
 
@@ -326,7 +335,7 @@ export class Init implements Command {
       args.push('--cwd');
       args.push(root);
     } else {
-      command = 'npm';
+      command = this.NPM || 'npm';
       args = ['uninstall'].concat(dependencies);
     }
 
