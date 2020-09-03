@@ -124,9 +124,36 @@ async function bootstrap(params) {
   console.log(e2eRunner);
 }
 
+/**
+ * 执行：端对端测试
+ * @param {Object} [params]
+ * @param {Boolean} [params.isBuildDev] 当前构建是否是 dev 场景
+ * @return {Promise<void>}
+ */
+async function run(params = {}) {
+  const { isBuildDev } = params;
+
+  // 创建 E2ERunner
+  const e2eRunner = await createE2ERunner();
+
+  // 设置启动
+  await e2eRunner.start();
+
+  // 测试之前准备环境
+  const prepareSUTResult = await prepareSUT(e2eRunner, { isBuildDev });
+  const { whistlePort, matmanAppPath } = prepareSUTResult;
+
+  // 直接执行测试文件
+  await runE2ETestDirect(e2eRunner, {
+    whistlePort,
+    matmanAppPath,
+  });
+
+  // 设置结束
+  await e2eRunner.stop();
+}
+
 module.exports = {
-  createE2ERunner,
-  prepareSUT,
-  runE2ETestDirect,
-  bootstrap
+  bootstrap,
+  run,
 };
