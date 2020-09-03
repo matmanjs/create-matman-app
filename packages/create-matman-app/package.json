@@ -1,6 +1,6 @@
 {
   "name": "create-matman-app",
-  "version": "0.1.2",
+  "version": "0.1.10",
   "description": "matman 脚手架工具",
   "scripts": {
     "prepublishOnly": "npm run build",
