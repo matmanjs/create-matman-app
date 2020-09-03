@@ -23,6 +23,7 @@ function bindClickEvent() {
 }
 
 function iAmNotCalled() {
+  // 这段代码没有被调用，因此不会被覆盖率统计到！
   console.log('I am not called!');
 }
 
