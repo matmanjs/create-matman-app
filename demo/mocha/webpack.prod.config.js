@@ -19,6 +19,9 @@ const webpackConfig = {
     new HtmlWebpackPlugin({
       filename: 'sogou.html',
       template: './public/sogou.html',
+      templateParameters: {
+        buildVersionDesc: '构建版本：生成环境版本(webpack.prod.config.js)',
+      },
     }),
   ],
 };

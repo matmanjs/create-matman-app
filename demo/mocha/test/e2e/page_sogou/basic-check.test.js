@@ -37,7 +37,7 @@ describe('搜狗首页：点击获取信息(默认debug)', function () {
         },
         msgInfo: {
           isExist: true,
-          wording: '我是原始信息',
+          wording: '我是原始信息，请点击下面按钮之后可更新信息',
           isSuccess: false,
           isLoaded: false,
         },
@@ -49,7 +49,7 @@ describe('搜狗首页：点击获取信息(默认debug)', function () {
     });
 
     it('消息信息为原始信息', function () {
-      expect(data.msgInfo.wording).to.be.equal('我是原始信息');
+      expect(data.msgInfo.wording).to.be.equal('我是原始信息，请点击下面按钮之后可更新信息');
     });
   });
 
