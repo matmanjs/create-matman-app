@@ -26,7 +26,7 @@ function getProjectRootPath() {
  *
  * @param {Object} [opts] 参数
  * @param {String} [opts.projectRootPath] 项目的根路径
- * @param {String} [opts.mockstarPort] mockstar 端口
+ * @param {Number} [opts.mockstarPort] mockstar 端口
  * @param {String} [opts.name] whistle 规则集的名字，会展示在 whistle 管理端 Rules 这个 tab 下
  */
 function getDevRules(opts = {}) {
@@ -60,7 +60,7 @@ function getDevRules(opts = {}) {
  *
  * @param {Object} [opts] 参数
  * @param {String} [opts.projectRootPath] 项目的根路径
- * @param {String} [opts.mockstarPort] mockstar 端口
+ * @param {Number} [opts.mockstarPort] mockstar 端口
  * @param {String} [opts.name] whistle 规则集的名字，会展示在 whistle 管理端 Rules 这个 tab 下
  */
 function getProdRules(opts = {}) {

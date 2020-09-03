@@ -19,6 +19,7 @@ async function createE2ERunner() {
  *
  * @param {E2ERunner} e2eRunner
  * @param {Object} [config]
+ * @param {Boolean} [config.isBuildDev] 当前构建是否是 dev 场景
  * @param {Number} [config.mockstarPort] MockStar 需要的端口
  * @param {Number} [config.whistlePort] Whistle 需要的端口
  * @param {Boolean} [config.useCurrentStartedWhistle] 是否复用当前可能启动的 whistle，适合开发场景下使用
@@ -26,7 +27,8 @@ async function createE2ERunner() {
  */
 async function prepareSUT(e2eRunner, config = {}) {
   // 第一步：构建项目
-  await e2eRunner.buildProject('npx cross-env ENABLE_E2E_TEST=1 npm run build-prod', {
+  const buildProjectCmd = `npx cross-env ENABLE_E2E_TEST=1 npm run ${config.isBuildDev ? 'build-dev' : 'build-prod'}`;
+  await e2eRunner.buildProject(buildProjectCmd, {
     cwd: e2eRunner.workspacePath,
   });
 
@@ -41,11 +43,11 @@ async function prepareSUT(e2eRunner, config = {}) {
     port: config.whistlePort,
     useCurrentStartedWhistle: config.useCurrentStartedWhistle,
     getWhistleRules: () => {
-      return whistle.getProdRules({
+      const opts = {
         projectRootPath: e2eRunner.workspacePath,
-        shouldUseMockstar: true,
         mockstarPort,
-      });
+      }
+      return isBuildDev ? whistle.getDevRules(opts) : whistle.getProdRules(opts);
     },
   });
 
