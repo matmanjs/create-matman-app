@@ -26,6 +26,8 @@
   },
   "homepage": "https://github.com/matmanjs/create-matman-app#readme",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
     "@umijs/fabric": "^2.2.2",
     "eslint": "^7.6.0",
     "lerna": "^3.22.1",

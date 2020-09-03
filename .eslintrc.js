@@ -1,5 +1,20 @@
 module.exports = {
-  extends: [require.resolve('@umijs/fabric/dist/eslint')],
+  env: {
+    es2020: true,
+    node: true,
+    browser: true,
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 11,
+    sourceType: 'module',
+  },
+  plugins: ['@typescript-eslint'],
   rules: {
     'no-console': ['warn', { allow: ['warn', 'error'] }],
   },

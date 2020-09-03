@@ -7,7 +7,7 @@ describe('搜狗首页：点击获取信息(error_100000)', function () {
 
   let resultData;
 
-  before(async function () {
+  before(async () => {
     resultData = await checkPage({
       show: false,
       doNotCloseBrowser: false,
@@ -18,14 +18,14 @@ describe('搜狗首页：点击获取信息(error_100000)', function () {
     });
   });
 
-  describe('第一步：开始操作之前，等待页面加载完成', function () {
+  describe('第一步：开始操作之前，等待页面加载完成', () => {
     let data;
 
-    before(function () {
+    before(() => {
       data = resultData.get('init');
     });
 
-    it('数据快照正确', function () {
+    it('数据快照正确', () => {
       expect(data).to.eql({
         webviewInfo: {
           title: 'hi jack in sogou.html',
@@ -51,19 +51,19 @@ describe('搜狗首页：点击获取信息(error_100000)', function () {
       });
     });
 
-    it('消息信息为原始信息', function () {
+    it('消息信息为原始信息', () => {
       expect(data.msgInfo.wording).to.be.equal('我是原始信息，请点击下面按钮之后可更新信息');
     });
   });
 
-  describe('第二步：点击按钮', function () {
+  describe('第二步：点击按钮', () => {
     let data;
 
-    before(function () {
+    before(() => {
       data = resultData.get('click');
     });
 
-    it('数据快照正确', function () {
+    it('数据快照正确', () => {
       expect(data).to.eql({
         webviewInfo: {
           title: 'hi jack in sogou.html',
@@ -89,11 +89,11 @@ describe('搜狗首页：点击获取信息(error_100000)', function () {
       });
     });
 
-    it('消息信息已更新为新信息', function () {
+    it('消息信息已更新为新信息', () => {
       expect(data.msgInfo.wording).to.be.equal('来自接口返回： {"retcode":100000,"err_msg":"error msg!"}');
     });
 
-    it('消息信息类型：失败', function () {
+    it('消息信息类型：失败', () => {
       expect(data.msgInfo.isSuccess).to.be.false;
     });
   });
