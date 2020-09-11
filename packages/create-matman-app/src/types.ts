@@ -4,6 +4,7 @@ export interface ArgsParsered {
   verbose: boolean | undefined;
   'template': string | undefined;
   'use-yarn': boolean | undefined;
+  'ts': boolean | undefined;
   _: string[];
   $0: string;
 }

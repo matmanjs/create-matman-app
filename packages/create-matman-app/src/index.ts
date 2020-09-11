@@ -38,6 +38,10 @@ import { execCommands } from './commands';
           describe: '指定需要的模板',
           type: 'string',
         })
+        .option('ts', {
+          describe: '指定使用typescript',
+          type: 'boolean',
+        })
         .option('use-yarn', { describe: '强制使用 YARN', type: 'boolean' });
     })
     .command('new <project-name> [options]', '新建一个 matman 模板', (y) => {
@@ -50,6 +54,10 @@ import { execCommands } from './commands';
           describe: '指定模板，可选：mocha',
           type: 'string',
         })
+        .option('ts', {
+          describe: '指定使用typescript',
+          type: 'boolean',
+        })
         .option('use-yarn', { describe: '强制使用 YARN', type: 'boolean' });
     })
     .command('info', '打印环境信息')
@@ -60,6 +68,10 @@ import { execCommands } from './commands';
     .option('template', {
       describe: '指定模板，可选：mocha',
       type: 'string',
+    })
+    .option('ts', {
+      describe: '指定使用typescript',
+      type: 'boolean',
     })
     .option('use-yarn', { describe: '强制使用 YARN', type: 'boolean' })
     .epilogue('For more information, find our manual at https://matmanjs.github.io/matman/');

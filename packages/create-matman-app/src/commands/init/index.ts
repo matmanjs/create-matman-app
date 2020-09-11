@@ -158,7 +158,7 @@ export class Init implements Command {
 
     const templateToInstall = await InitUtil.getTemplateInstallPackage(
       this.originalDirectory,
-      this.context.template,
+      this.context,
     );
 
     console.log('安装依赖包, 这可能会花费几分钟的时间.');

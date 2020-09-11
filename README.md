@@ -32,6 +32,7 @@ $ yarn global remove create-matman-app
 
 ### 全局参数
 
+- `--ts`: 拉取模板ts模板：cma-template-typescript
 - `--help`：显示帮助信息
 - `--version`：显示 CLI 工具版本
 - `--verbose`：打印详细日志
@@ -89,6 +90,7 @@ npx create-matman-app my-app --template [template-name]
 默认情况下，我们提供两个模板：
 
 - [`cma-template`](https://github.com/matmanjs/create-matman-app/tree/master/packages/cma-template)
+- [`cma-template-typescript`](https://github.com/matmanjs/create-matman-app/tree/master/packages/cma-template-typescript)
 - [`cma-template-dwt（未完成）`](https://github.com/matmanjs/create-matman-app)
 
 你也可以在 NPM 上通过 [cma-template-*](https://www.npmjs.com/search?q=cma-template-*) 进行搜索
