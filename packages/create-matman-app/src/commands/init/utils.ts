@@ -6,6 +6,7 @@ import semver from 'semver';
 import spawn from 'cross-spawn';
 import validateProjectName from 'validate-npm-package-name';
 import { execSync } from 'child_process';
+import { ArgsParsered } from '../../types';
 
 export class InitUtil {
   /**
@@ -329,8 +330,13 @@ export class InitUtil {
    * @param template
    * @param originalDirectory
    */
-  static getTemplateInstallPackage(originalDirectory: string, template?: string) {
+  static getTemplateInstallPackage(originalDirectory: string, context: ArgsParsered) {
+    const { template, ts } = context;
     let templateToInstall = 'cma-template';
+
+    if (ts) {
+      templateToInstall = `${templateToInstall}-typescript`;
+    }
 
     if (!template) {
       return Promise.resolve(templateToInstall);
