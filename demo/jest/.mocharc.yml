@@ -1,4 +1,0 @@
-reporter: 'mochawesome'
-reporterOptions:
-  - 'reportDir=.matman_output/mochawesome'
-recursive: true

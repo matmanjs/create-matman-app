@@ -1,13 +1,11 @@
-const { expect } = require('chai');
-
 const checkPage = require('../../../DevOps/matman-app/case_modules/page_sogou/basic-check');
 
 describe('搜狗首页：点击获取信息(默认debug)', function () {
-  this.timeout(30000);
+  jest.setTimeout(30000);
 
   let resultData;
 
-  before(async () => {
+  beforeAll(async () => {
     resultData = await checkPage({
       show: false,
       doNotCloseBrowser: false,
@@ -18,12 +16,12 @@ describe('搜狗首页：点击获取信息(默认debug)', function () {
   describe('第一步：开始操作之前，等待页面加载完成', () => {
     let data;
 
-    before(() => {
+    beforeAll(() => {
       data = resultData.get('init');
     });
 
-    it('数据快照正确', () => {
-      expect(data).to.eql({
+    test('数据快照正确', () => {
+      expect(data).toEqual({
         webviewInfo: {
           title: 'hi jack in sogou.html',
           width: 1024,
@@ -48,20 +46,20 @@ describe('搜狗首页：点击获取信息(默认debug)', function () {
       });
     });
 
-    it('消息信息为原始信息', () => {
-      expect(data.msgInfo.wording).to.be.equal('我是原始信息，请点击下面按钮之后可更新信息');
+    test('消息信息为原始信息', () => {
+      expect(data.msgInfo.wording).toBe('我是原始信息，请点击下面按钮之后可更新信息');
     });
   });
 
   describe('第二步：点击按钮', () => {
     let data;
 
-    before(() => {
+    beforeAll(() => {
       data = resultData.get('click');
     });
 
-    it('数据快照正确', () => {
-      expect(data).to.eql({
+    test('数据快照正确', () => {
+      expect(data).toEqual({
         webviewInfo: {
           title: 'hi jack in sogou.html',
           width: 1024,
@@ -86,12 +84,12 @@ describe('搜狗首页：点击获取信息(默认debug)', function () {
       });
     });
 
-    it('消息信息已更新为新信息', () => {
-      expect(data.msgInfo.wording).to.be.equal('来自接口返回： 我是 debug');
+    test('消息信息已更新为新信息', () => {
+      expect(data.msgInfo.wording).toBe('来自接口返回： 我是 debug');
     });
 
-    it('消息信息类型：成功', () => {
-      expect(data.msgInfo.isSuccess).to.be.true;
+    test('消息信息类型：成功', () => {
+      expect(data.msgInfo.isSuccess).toBe(true);
     });
   });
 });
