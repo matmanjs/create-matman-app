@@ -83,7 +83,7 @@ $ npm run test:e2e:bootstrap
 #### 2.2.2 执行测试文件
 
 ```bash
-# 使用 mocha 执行测试文件
+# 使用 jest 执行测试文件
 $ npm run test:e2e:direct
 ```
 

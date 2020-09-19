@@ -79,8 +79,7 @@ async function runE2ETestDirect(e2eRunner, config = {}) {
   await e2eRunner.runE2ETest('tnpm run test:e2e:direct', {
     cwd: e2eRunner.workspacePath,
     whistlePort,
-    matmanAppPath,
-    mochawesomeJsonFilePath: path.join(e2eRunner.outputPath, './mochawesome/mochawesome.json'),
+    matmanAppPath
   });
 
   return {
