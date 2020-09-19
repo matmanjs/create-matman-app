@@ -1,6 +1,5 @@
 // https://jestjs.io/docs/en/configuration.html
 module.exports = {
-  // Use this configuration option to add custom reporters to Jest
   reporters: [
     'default',
     [
@@ -13,6 +12,6 @@ module.exports = {
     ],
   ],
 
-  // The test environment that will be used for testing
-  testEnvironment: 'node',
+  // 必须设置运行之后强制退出，否则在报错的情况下可能会卡死
+  forceExit: true,
 };
