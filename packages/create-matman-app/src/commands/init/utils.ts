@@ -331,10 +331,25 @@ export class InitUtil {
    * @param originalDirectory
    */
   static getTemplateInstallPackage(originalDirectory: string, context: ArgsParsered) {
+    type mapType = {
+      mocha: string;
+      'mocha-ts': string;
+      jest: string;
+      'jest-ts': string;
+    };
     const { template, ts } = context;
-    let templateToInstall = 'cma-template';
+    let templateKey: keyof mapType | string | undefined = template || 'mocha';
 
-    if (ts) {
+    const templateMap: mapType = {
+      mocha: 'cma-template',
+      'mocha-ts': 'cma-template-typescript',
+      jest: 'cma-template-jest',
+      'jest-ts': 'cma-template-jest-ts'
+    };
+  
+    let templateToInstall: string = templateMap[templateKey as keyof mapType]; 
+    // 当默认mocha模板时--ts命令生效
+    if (ts && template === 'mocha') {
       templateToInstall = `${templateToInstall}-typescript`;
     }
 

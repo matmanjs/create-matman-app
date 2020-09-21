@@ -1,9 +1,9 @@
 {
-  "name": "cma-template-typescript",
+  "name": "cma-template-jest",
   "version": "0.1.10",
   "description": "> TODO: description",
   "author": "helinjiang <onehlj@qq.com>",
-  "homepage": "https://github.com/matmanjs/create-matman-app/tree/master/packages/cma-template#readme",
+  "homepage": "https://github.com/matmanjs/create-matman-app/tree/master/packages/cma-template-jest-ts#readme",
   "license": "MIT",
   "files": [
     "template",
@@ -15,7 +15,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/matmanjs/create-matman-app.git",
-    "directory": "packages/cma-template-typescript"
+    "directory": "packages/cma-template-jest-ts"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
