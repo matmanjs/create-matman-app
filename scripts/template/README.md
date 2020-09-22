@@ -3,10 +3,7 @@
 本项目由 [create-matman-app](https://www.npmjs.com/package/create-matman-app) 初始化生成，相应的初始化命令如下：
 
 ```
-$ npx create-matman-app my-app 
-
-# 或者
-$ npx create-matman-app my-app --template=mocha
+<%= installCmd %>
 ```
 
 ## 1. 项目介绍
@@ -19,8 +16,7 @@ $ npx create-matman-app my-app --template=mocha
 - 代理工具：[Whistle](https://github.com/avwo/whistle)
 - mock 工具：[MockStar](https://github.com/mockstarjs/mockstar)
 - web 端对端测试框架：[Matman](https://github.com/matmanjs/matman)
-- 测试框架：[Mocha](https://mochajs.org/) 
-- 断言库：[Chai](https://www.chaijs.com/)
+<%=dependencies%>
 
 ## 2. 命令
 

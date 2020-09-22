@@ -39,8 +39,8 @@ function copyProjectJS(demoTemplateRootDir, distDir) {
 }
 
 function copyReadMe(sourceDir, distDir, data) {
-  fse.outputFileSync(path.join(sourceDir, 'README.md'), ejs.render(
-    fse.readFileSync(path.join(distDir, 'README.md'), { encoding: 'utf8' }),
+  fse.outputFileSync(path.join(distDir, 'README.md'), ejs.render(
+    fse.readFileSync(path.join(sourceDir, 'README.md'), { encoding: 'utf8' }),
     data,
   ));
 }
