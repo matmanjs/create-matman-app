@@ -1,6 +1,6 @@
-# create-matman-app
+# 使用 matman 做端对端测试(E2E/UI Testing)
 
-本项目是由 [create-matman-app](https://www.npmjs.com/package/create-matman-app) 的默认模板初始化生成，相应的初始化命令如下：
+本项目由 [create-matman-app](https://www.npmjs.com/package/create-matman-app) 初始化生成，相应的初始化命令如下：
 
 ```
 $ <%= installCmd %>
