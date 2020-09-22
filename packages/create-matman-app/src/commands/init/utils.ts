@@ -333,24 +333,28 @@ export class InitUtil {
   static getTemplateInstallPackage(originalDirectory: string, context: ArgsParsered) {
     type mapType = {
       mocha: string;
+      ts: string;
       'mocha-ts': string;
       jest: string;
       'jest-ts': string;
     };
-    const { template, ts } = context;
-    let templateKey: keyof mapType | string | undefined = template || 'mocha';
+    const { template = '', ts } = context;
+
+    const templateKey: keyof mapType | string = template || 'mocha';
 
     const templateMap: mapType = {
       mocha: 'cma-template',
+      ts: 'cma-template-typescript',
       'mocha-ts': 'cma-template-typescript',
       jest: 'cma-template-jest',
       'jest-ts': 'cma-template-jest-ts'
     };
-  
-    let templateToInstall: string = templateMap[templateKey as keyof mapType]; 
-    // 当默认mocha模板时--ts命令生效
-    if (ts && template === 'mocha') {
-      templateToInstall = `${templateToInstall}-typescript`;
+
+    let templateToInstall: string = templateMap[templateKey as keyof mapType];
+
+    // 当默认mocha模板时 --ts 命令生效，但不再默认暴露出去
+    if (ts) {
+      templateToInstall = templateMap['mocha-ts'];
     }
 
     if (!template) {
@@ -395,7 +399,9 @@ export class InitUtil {
       // Covers templates without the `cra-template` prefix:
       // - NAME
       // - @SCOPE/NAME
-      templateToInstall = `${scope}${templateToInstall}-${templateName}${version}`;
+      // TODO 这里还需要再思考下合理性
+      // templateToInstall = `${scope}${templateToInstall}-${templateName}${version}`;
+      templateToInstall = `${scope}${templateToInstall}${version}`;
     }
 
     return Promise.resolve(templateToInstall);

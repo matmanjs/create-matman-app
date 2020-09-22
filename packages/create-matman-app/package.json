@@ -1,6 +1,6 @@
 {
   "name": "create-matman-app",
-  "version": "0.1.10",
+  "version": "0.2.0",
   "description": "matman 脚手架工具",
   "scripts": {
     "prepublishOnly": "npm run build",
@@ -40,7 +40,7 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "cross-spawn": "^7.0.3",
-    "envinfo": "^7.7.2",
+    "envinfo": "^7.7.3",
     "fs-extra": "^9.0.1",
     "glob": "^7.1.6",
     "semver": "^7.3.2",
@@ -51,7 +51,7 @@
     "@types/cross-spawn": "^6.0.2",
     "@types/fs-extra": "^9.0.1",
     "@types/glob": "^7.1.3",
-    "@types/semver": "^7.3.1",
+    "@types/semver": "^7.3.4",
     "@types/tmp": "^0.2.0",
     "@types/validate-npm-package-name": "^3.0.0",
     "@types/yargs": "^15.0.5",
