@@ -38,6 +38,17 @@ function copyProjectJS(demoTemplateRootDir, distDir) {
   fse.copySync(path.join(projectTemplateRootDir, 'src'), path.join(distDir, 'src'));
 }
 
+function copyProjectTS(demoTemplateRootDir, distDir) {
+  const projectTemplateRootDir = path.join(demoTemplateRootDir, 'project-ts');
+
+  // 复制 public 文件夹
+  fse.copySync(path.join(projectTemplateRootDir, 'public'), path.join(distDir, 'public'));
+
+  // 复制 src 文件夹
+  fse.copySync(path.join(projectTemplateRootDir, 'src'), path.join(distDir, 'src'));
+  fse.copySync(path.join(projectTemplateRootDir, 'tsconfig.json'), path.join(distDir, 'tsconfig.json'));
+}
+
 function copyReadMe(sourceDir, distDir, data) {
   fse.outputFileSync(path.join(distDir, 'README.md'), ejs.render(
     fse.readFileSync(path.join(sourceDir, 'README.md'), { encoding: 'utf8' }),
@@ -97,5 +108,27 @@ function generateDemoMocha() {
   copyPackageJson(path.join(templateRootDir, 'project-js'), demoDistDir, demoOverrideDir);
 }
 
+function generateDemoMochaTs() {
+  const demoName = 'mocha-ts';
+  const templateRootDir = path.join(__dirname, 'template');
+  const demoDistDir = path.join(__dirname, '../demo', demoName);
+  const demoOverrideDir = path.join(templateRootDir, demoName);
+
+  copyProjectCommon(templateRootDir, demoDistDir);
+  copyProjectTS(templateRootDir, demoDistDir);
+
+  copyReadMe(templateRootDir, demoDistDir, {
+    installCmd: `$ npx create-matman-app my-app --template=mocha-ts`,
+    dependencies: `- 测试框架：[Mocha](https://mochajs.org/) \n- 断言库：[Chai](https://www.chaijs.com/)\n- TypeScript：[TypeScript](https://www.typescriptlang.org/)`,
+  });
+
+  // 复制 test 文件夹的执行脚本
+  fse.copySync(path.join(path.join(templateRootDir, 'mocha'), 'test'), path.join(demoDistDir, 'test'));
+
+  // package.json
+  copyPackageJson(path.join(templateRootDir, 'project-ts'), demoDistDir, demoOverrideDir);
+}
+
 generateDemoJest();
 generateDemoMocha();
+generateDemoMochaTs();
