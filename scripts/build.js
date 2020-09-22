@@ -46,7 +46,7 @@ function generateDemoJest() {
   fse.outputFileSync(path.join(distDir, 'README.md'), ejs.render(
     fse.readFileSync(path.join(demoProjectDir, 'README.md'), { encoding: 'utf8' }),
     {
-      installCmd: `npx create-matman-app my-app --template=jest`,
+      installCmd: `$ npx create-matman-app my-app --template=jest`,
       dependencies: `- 测试框架：[Jest](https://https://jestjs.io/)`,
     },
   ));
@@ -64,4 +64,35 @@ function generateDemoJest() {
   });
 }
 
+function generateDemoMocha() {
+  const templateName = 'mocha';
+  const demoProjectDir = path.join(__dirname, 'demo-project');
+  const distDir = path.join(__dirname, '../demo', templateName);
+
+  // 复制项目
+  copyProject(demoProjectDir, distDir);
+
+  // README.md
+  fse.outputFileSync(path.join(distDir, 'README.md'), ejs.render(
+    fse.readFileSync(path.join(demoProjectDir, 'README.md'), { encoding: 'utf8' }),
+    {
+      installCmd: `$ npx create-matman-app my-app \n\n# 或者\n$ npx create-matman-app my-app --template=mocha`,
+      dependencies: `- 测试框架：[Mocha](https://mochajs.org/) \n- 断言库：[Chai](https://www.chaijs.com/)`,
+    },
+  ));
+
+  // 复制 test 文件夹的执行脚本
+  fse.copySync(path.join(__dirname, 'demo-other/mocha/test'), path.join(distDir, 'test'));
+
+  // package.json
+  fse.outputJson(path.join(distDir, 'package.json'), _.merge(
+    {},
+    fse.readJsonSync(path.join(demoProjectDir, 'package.json')),
+    fse.readJsonSync(path.join(__dirname, 'demo-other/mocha/package.json')),
+  ), {
+    spaces: '  ',
+  });
+}
+
 generateDemoJest();
+generateDemoMocha();

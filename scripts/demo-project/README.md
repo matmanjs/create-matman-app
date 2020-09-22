@@ -3,7 +3,7 @@
 本项目由 [create-matman-app](https://www.npmjs.com/package/create-matman-app) 初始化生成，相应的初始化命令如下：
 
 ```
-$ <%= installCmd %>
+<%= installCmd %>
 ```
 
 ## 1. 项目介绍
@@ -81,8 +81,9 @@ $ npm run test:e2e:bootstrap
 
 #### 2.2.2 执行测试文件
 
+完成 "2.2.1 准备测试环境" 之后，就可以直接运行测试（更适合调试阶段运行）：
+
 ```bash
-# 使用 jest 执行测试文件
 $ npm run test:e2e:direct
 ```
 

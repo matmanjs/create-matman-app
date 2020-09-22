@@ -81,8 +81,9 @@ $ npm run test:e2e:bootstrap
 
 #### 2.2.2 执行测试文件
 
+完成 "2.2.1 准备测试环境" 之后，就可以直接运行测试（更适合调试阶段运行）：
+
 ```bash
-# 使用 jest 执行测试文件
 $ npm run test:e2e:direct
 ```
 
