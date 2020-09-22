@@ -10,9 +10,9 @@
     "test",
     "e2e",
     "matman",
-    "cli"
+    "create-matman-app"
   ],
-  "author": "derekjqwang <derekjqwang@tencent.com>",
+  "author": "helinjiang",
   "homepage": "https://github.com/matmanjs/create-matman-app/tree/master/packages/create-matman-app#readme",
   "license": "MIT",
   "main": "lib/index.js",
@@ -25,9 +25,6 @@
   ],
   "bin": {
     "create-matman-app": "lib/index.js"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
   },
   "repository": {
     "type": "git",

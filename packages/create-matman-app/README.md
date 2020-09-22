@@ -1,11 +1,5 @@
-# `create-matman-app`
+# create-matman-app
 
-> TODO: description
+Web 端对端测试(E2E/UI test)框架 [matman](https://github.com/matmanjs/matman) 的脚手架模板。
 
-## Usage
-
-```
-const createMatmanApp = require('create-matman-app');
-
-// TODO: DEMONSTRATE API
-```
+更多资料请参考： https://github.com/matmanjs/create-matman-app 。
