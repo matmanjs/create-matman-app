@@ -1,0 +1,27 @@
+{
+  "name": "project-ts",
+  "private": true,
+  "dependencies": {
+    "lodash": "^4.17.20"
+  },
+  "scripts": {
+    "build-dev": "webpack --config webpack.dev.config.js",
+    "build-prod": "webpack --config webpack.prod.config.js",
+    "use-whistle-dev": "cd DevOps/whistle && npm run use-dev",
+    "use-whistle-prod": "cd DevOps/whistle && npm run use-prod"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.1",
+    "@types/node": "^14.11.2",
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.2",
+    "html-webpack-plugin": "^4.5.0",
+    "istanbul-instrumenter-loader": "^3.0.1",
+    "matman-e2e-test": "^1.2.1",
+    "ts-loader": "^8.0.4",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "create-matman-app-mocha",
+  "private": true,
+  "scripts": {
+    "test": "npm run test:e2e",
+    "test:e2e": "node test/run-e2e-test.js",
+    "test:e2e:show": "cross-env SHOW_BROWSER=1 npm run test:e2e",
+    "test:e2e:direct": "mocha test/e2e",
+    "test:e2e:bootstrap": "node test/bootstrap-sut.js",
+    "test:e2e:bootstrap:dev": "node test/bootstrap-sut-dev.js"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.1.3",
+    "mochawesome": "^6.1.1"
+  }
+}

@@ -1,7 +1,14 @@
 {
-  "name": "cma-template-jest",
-  "version": "0.1.10",
-  "description": "> TODO: description",
+  "name": "cma-template-jest-ts",
+  "version": "1.0.1",
+  "description": "matman project template use Jest and TypeScript",
+  "keywords": [
+    "matman",
+    "create-matman-app",
+    "template",
+    "jest",
+    "TypeScript"
+  ],
   "author": "helinjiang <onehlj@qq.com>",
   "homepage": "https://github.com/matmanjs/create-matman-app/tree/master/packages/cma-template-jest-ts#readme",
   "license": "MIT",
@@ -9,16 +16,10 @@
     "template",
     "template.json"
   ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/matmanjs/create-matman-app.git",
     "directory": "packages/cma-template-jest-ts"
-  },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/matmanjs/create-matman-app/issues"

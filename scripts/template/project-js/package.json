@@ -1,0 +1,22 @@
+{
+  "name": "project-js",
+  "private": true,
+  "scripts": {
+    "build-dev": "webpack --config webpack.dev.config.js",
+    "build-prod": "webpack --config webpack.prod.config.js",
+    "use-whistle-dev": "cd DevOps/whistle && npm run use-dev",
+    "use-whistle-prod": "cd DevOps/whistle && npm run use-prod"
+  },
+  "dependencies": {
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.2",
+    "html-webpack-plugin": "^4.5.0",
+    "istanbul-instrumenter-loader": "^3.0.1",
+    "matman-e2e-test": "^1.2.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}

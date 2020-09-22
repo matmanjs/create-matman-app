@@ -1,6 +1,6 @@
 {
   "name": "create-matman-app",
-  "version": "0.1.10",
+  "version": "1.0.0",
   "description": "matman 脚手架工具",
   "scripts": {
     "prepublishOnly": "npm run build",
@@ -10,9 +10,9 @@
     "test",
     "e2e",
     "matman",
-    "cli"
+    "create-matman-app"
   ],
-  "author": "derekjqwang <derekjqwang@tencent.com>",
+  "author": "helinjiang",
   "homepage": "https://github.com/matmanjs/create-matman-app/tree/master/packages/create-matman-app#readme",
   "license": "MIT",
   "main": "lib/index.js",
@@ -26,9 +26,6 @@
   "bin": {
     "create-matman-app": "lib/index.js"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/matmanjs/create-matman-app.git",
@@ -40,7 +37,7 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "cross-spawn": "^7.0.3",
-    "envinfo": "^7.7.2",
+    "envinfo": "^7.7.3",
     "fs-extra": "^9.0.1",
     "glob": "^7.1.6",
     "semver": "^7.3.2",
@@ -51,7 +48,7 @@
     "@types/cross-spawn": "^6.0.2",
     "@types/fs-extra": "^9.0.1",
     "@types/glob": "^7.1.3",
-    "@types/semver": "^7.3.1",
+    "@types/semver": "^7.3.4",
     "@types/tmp": "^0.2.0",
     "@types/validate-npm-package-name": "^3.0.0",
     "@types/yargs": "^15.0.5",

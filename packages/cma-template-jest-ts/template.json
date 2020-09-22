@@ -1,7 +1,6 @@
 {
   "package": {
-    "name": "cma-template-jest",
-    "version": "0.1.0",
+    "name": "create-matman-app-jest-ts",
     "private": true,
     "dependencies": {
       "lodash": "^4.17.20"
@@ -19,23 +18,22 @@
       "test:e2e:bootstrap:dev": "node test/bootstrap-sut-dev.js"
     },
     "devDependencies": {
-      "@types/jest": "^26.0.14",
       "@types/jquery": "^3.5.1",
-      "@types/node": "^14.11.1",
-      "chai": "^4.2.0",
+      "@types/node": "^14.11.2",
       "clean-webpack-plugin": "^3.0.0",
       "cross-env": "^7.0.2",
-      "html-webpack-plugin": "^4.3.0",
+      "html-webpack-plugin": "^4.5.0",
       "istanbul-instrumenter-loader": "^3.0.1",
-      "jest": "^26.4.2",
-      "jest-matman-reporter": "^0.1.0",
-      "matman-e2e-test": "^1.2.0",
-      "ts-jest": "^26.4.0",
+      "matman-e2e-test": "^1.2.1",
       "ts-loader": "^8.0.4",
+      "ts-node": "^9.0.0",
       "typescript": "^4.0.3",
-      "webpack": "^4.44.1",
-      "webpack-cli": "^3.3.12"
+      "webpack": "^4.44.2",
+      "webpack-cli": "^3.3.12",
+      "@types/jest": "^26.0.14",
+      "jest": "^26.4.2",
+      "ts-jest": "^26.4.0",
+      "jest-matman-reporter": "^0.1.0"
     }
   }
-  
 }

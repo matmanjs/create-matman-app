@@ -1,0 +1,27 @@
+{
+  "name": "cma-template-mocha-ts",
+  "version": "1.0.1",
+  "description": "matman project template use Mocha and TypeScript",
+  "keywords": [
+    "matman",
+    "create-matman-app",
+    "template",
+    "mocha",
+    "TypeScript"
+  ],
+  "author": "helinjiang <onehlj@qq.com>",
+  "homepage": "https://github.com/matmanjs/create-matman-app/tree/master/packages/cma-template-mocha-ts#readme",
+  "license": "MIT",
+  "files": [
+    "template",
+    "template.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matmanjs/create-matman-app.git",
+    "directory": "packages/cma-template-mocha-ts"
+  },
+  "bugs": {
+    "url": "https://github.com/matmanjs/create-matman-app/issues"
+  }
+}
