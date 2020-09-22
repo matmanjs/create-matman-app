@@ -8,7 +8,7 @@
 
 create-matman-app 适用于 macOS、Windows 和 Linux。
 
-如果 create-matman-app 不能正常工作，请提交 [issue](https://github.com/matmanjs/create-matman-app/issues/new)。
+如果 create-matman-app 不能正常工作，请提交 [issue](https://github.com/matmanjs/create-matman-app/issues/new) 。
 
 ## 快速开始
 

@@ -1,16 +1,16 @@
 {
-  "name": "cma-template-jest",
+  "name": "cma-template-mocha-ts",
   "version": "0.1.10",
-  "description": "matman project template use Jest and TypeScript",
+  "description": "matman project template use Mocha and TypeScript",
   "keywords": [
     "matman",
     "create-matman-app",
     "template",
-    "jest",
+    "mocha",
     "TypeScript"
   ],
   "author": "helinjiang <onehlj@qq.com>",
-  "homepage": "https://github.com/matmanjs/create-matman-app/tree/master/packages/cma-template-jest-ts#readme",
+  "homepage": "https://github.com/matmanjs/create-matman-app/tree/master/packages/cma-template-mocha-ts#readme",
   "license": "MIT",
   "files": [
     "template",
@@ -19,7 +19,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/matmanjs/create-matman-app.git",
-    "directory": "packages/cma-template-jest-ts"
+    "directory": "packages/cma-template-mocha-ts"
   },
   "bugs": {
     "url": "https://github.com/matmanjs/create-matman-app/issues"
