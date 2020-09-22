@@ -1,6 +1,5 @@
 {
   "name": "create-matman-app-mocha",
-  "version": "0.1.0",
   "private": true,
   "scripts": {
     "build-dev": "webpack --config webpack.dev.config.js",
