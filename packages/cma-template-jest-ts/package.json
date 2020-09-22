@@ -1,6 +1,6 @@
 {
   "name": "cma-template-jest-ts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "matman project template use Jest and TypeScript",
   "keywords": [
     "matman",
