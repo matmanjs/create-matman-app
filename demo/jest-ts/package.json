@@ -31,6 +31,7 @@
     "webpack-cli": "^3.3.12",
     "@types/jest": "^26.0.14",
     "jest": "^26.4.2",
+    "ts-jest": "^26.4.0",
     "jest-matman-reporter": "^0.1.0"
   }
 }
