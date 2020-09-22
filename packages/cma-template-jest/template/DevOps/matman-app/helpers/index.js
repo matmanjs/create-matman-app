@@ -1,6 +1,6 @@
 const _ = require('lodash');
-const matman = require('../../../../../cma-template-jest-ts/template/DevOps/matman-app/helpers/node_modules/matman');
-const { BrowserRunner } = require('../../../../../cma-template-jest-ts/template/DevOps/matman-app/helpers/node_modules/matman-runner-puppeteer');
+const matman = require('matman');
+const { BrowserRunner } = require('matman-runner-puppeteer');
 
 /**
  * 设置浏览器打开时所模拟的设备参数

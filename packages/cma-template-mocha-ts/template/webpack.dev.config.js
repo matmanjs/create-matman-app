@@ -39,7 +39,7 @@ const webpackConfig = {
 if (process.env.ENABLE_E2E_TEST === '1') {
   webpackConfig.devtool = 'sourcemap';
   webpackConfig.module.rules.push({
-    test: /\.js$/,
+    test: /\.ts$/,
     use: {
       loader: 'istanbul-instrumenter-loader',
       options: { esModules: true },

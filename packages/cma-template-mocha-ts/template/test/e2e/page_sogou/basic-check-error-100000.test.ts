@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import * as checkPage from '../../../DevOps/matman-app/case_modules/page_sogou/basic-check.js';
+import * as checkPage from '../../../DevOps/matman-app/case_modules/page_sogou/basic-check';
 
 describe('搜狗首页：点击获取信息(error_100000)', function () {
   this.timeout(30000);
