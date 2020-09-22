@@ -36,6 +36,11 @@ function copyProjectJS(demoTemplateRootDir, distDir) {
 
   // 复制 src 文件夹
   fse.copySync(path.join(projectTemplateRootDir, 'src'), path.join(distDir, 'src'));
+
+  // 复制根目录的一些文件
+  ['webpack.dev.config.js', 'webpack.prod.config.js'].forEach((file) => {
+    fse.copySync(path.join(projectTemplateRootDir, file), path.join(distDir, file));
+  });
 }
 
 function copyProjectTS(demoTemplateRootDir, distDir) {
@@ -46,7 +51,11 @@ function copyProjectTS(demoTemplateRootDir, distDir) {
 
   // 复制 src 文件夹
   fse.copySync(path.join(projectTemplateRootDir, 'src'), path.join(distDir, 'src'));
-  fse.copySync(path.join(projectTemplateRootDir, 'tsconfig.json'), path.join(distDir, 'tsconfig.json'));
+
+  // tsconfig.json
+  ['webpack.dev.config.js', 'webpack.prod.config.js', 'tsconfig.json'].forEach((file) => {
+    fse.copySync(path.join(projectTemplateRootDir, file), path.join(distDir, file));
+  });
 }
 
 function copyReadMe(sourceDir, distDir, data) {
@@ -66,6 +75,19 @@ function copyPackageJson(sourceDir, distDir, overrideDir) {
   });
 }
 
+function copyE2EScript(templateRootDir, distDir, name) {
+  [
+    'bootstrap-sut.js',
+    'bootstrap-sut-dev.js',
+    'run-e2e-test.js',
+    'run-e2e-test-dev.js',
+  ].forEach((file) => {
+    fse.copySync(path.join(templateRootDir, 'e2e-scripts', file), path.join(distDir, 'test', file));
+  });
+
+  fse.copySync(path.join(templateRootDir, `e2e-scripts/${name}.e2e.config.js`), path.join(distDir, 'test/e2e.config.js'));
+}
+
 function generateDemoJest() {
   const demoName = 'jest';
   const templateRootDir = path.join(__dirname, 'template');
@@ -82,6 +104,10 @@ function generateDemoJest() {
 
   // 复制 test 文件夹的执行脚本
   fse.copySync(path.join(demoOverrideDir, 'test'), path.join(demoDistDir, 'test'));
+  fse.copySync(path.join(demoOverrideDir, 'jest.config.js'), path.join(demoDistDir, 'jest.config.js'));
+
+  // copy e2e scripts
+  copyE2EScript(templateRootDir, demoDistDir, 'jest');
 
   // package.json
   copyPackageJson(path.join(templateRootDir, 'project-js'), demoDistDir, demoOverrideDir);
@@ -104,6 +130,11 @@ function generateDemoMocha() {
   // 复制 test 文件夹的执行脚本
   fse.copySync(path.join(demoOverrideDir, 'test'), path.join(demoDistDir, 'test'));
 
+  fse.copySync(path.join(demoOverrideDir, '.mocharc.yml'), path.join(demoDistDir, '.mocharc.yml'));
+
+  // copy e2e scripts
+  copyE2EScript(templateRootDir, demoDistDir, 'mocha');
+
   // package.json
   copyPackageJson(path.join(templateRootDir, 'project-js'), demoDistDir, demoOverrideDir);
 }
@@ -123,7 +154,12 @@ function generateDemoMochaTs() {
   });
 
   // 复制 test 文件夹的执行脚本
-  fse.copySync(path.join(path.join(templateRootDir, 'mocha'), 'test'), path.join(demoDistDir, 'test'));
+  fse.copySync(path.join(demoOverrideDir, 'test'), path.join(demoDistDir, 'test'));
+
+  fse.copySync(path.join(demoOverrideDir, '.mocharc.yml'), path.join(demoDistDir, '.mocharc.yml'));
+
+  // copy e2e scripts
+  copyE2EScript(templateRootDir, demoDistDir, 'mocha');
 
   // package.json
   copyPackageJson(path.join(templateRootDir, 'project-ts'), demoDistDir, demoOverrideDir);
@@ -144,12 +180,16 @@ function generateDemoJestTs() {
   });
 
   // 复制 test 文件夹的执行脚本
-  fse.copySync(path.join(path.join(templateRootDir, 'jest'), 'test'), path.join(demoDistDir, 'test'));
+  fse.copySync(path.join(demoOverrideDir, 'test'), path.join(demoDistDir, 'test'));
+
+  fse.copySync(path.join(demoOverrideDir, 'jest.config.js'), path.join(demoDistDir, 'jest.config.js'));
+
+  // copy e2e scripts
+  copyE2EScript(templateRootDir, demoDistDir, 'jest');
 
   // package.json
   copyPackageJson(path.join(templateRootDir, 'project-ts'), demoDistDir, demoOverrideDir);
 }
-
 
 generateDemoJest();
 generateDemoMocha();
