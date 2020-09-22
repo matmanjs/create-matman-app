@@ -3,3 +3,4 @@ packages/*/lib
 *-debug.log
 .DS_Store
 .idea
+tmp

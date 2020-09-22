@@ -1,9 +1,9 @@
-# create-matman-app 的 jest 模板
+# create-matman-app
 
 本项目是由 [create-matman-app](https://www.npmjs.com/package/create-matman-app) 的默认模板初始化生成，相应的初始化命令如下：
 
 ```
-$ npx create-matman-app matman-app
+$ <%= installCmd %>
 ```
 
 ## 1. 项目介绍
@@ -12,12 +12,11 @@ $ npx create-matman-app matman-app
 
 其中涉及到的框架和工具包括但不限于如下，更多资料请请查阅 [脚手架：create-matman-app 使用指南](https://matmanjs.github.io/matman/tool/create-matman-app.html) 。
 
-- 测试框架：[Mocha](https://mochajs.org/) 
-- 断言库：[Chai](https://www.chaijs.com/)
+
 - 代理工具：[Whistle](https://github.com/avwo/whistle)
 - mock 工具：[MockStar](https://github.com/mockstarjs/mockstar)
 - web 端对端测试框架：[Matman](https://github.com/matmanjs/matman)
-
+<%=dependencies%>
 
 ## 2. 命令
 
@@ -35,7 +34,7 @@ $ npm install
 - 第二步：启动 mockstar，用于本地构建 mock server
 - 第三步：启动 whistle 并设置代理规则
 - 第四步：启动 matman，提供了无头浏览器，用于 web 端对端测试时被测试文件调用
-- 第五步：使用 mocha 执行测试文件
+- 第五步：执行测试文件
 
 ```bash
 # 执行 web 端对端测试
