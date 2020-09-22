@@ -129,6 +129,29 @@ function generateDemoMochaTs() {
   copyPackageJson(path.join(templateRootDir, 'project-ts'), demoDistDir, demoOverrideDir);
 }
 
+function generateDemoJestTs() {
+  const demoName = 'jest-ts';
+  const templateRootDir = path.join(__dirname, 'template');
+  const demoDistDir = path.join(__dirname, '../demo', demoName);
+  const demoOverrideDir = path.join(templateRootDir, demoName);
+
+  copyProjectCommon(templateRootDir, demoDistDir);
+  copyProjectTS(templateRootDir, demoDistDir);
+
+  copyReadMe(templateRootDir, demoDistDir, {
+    installCmd: `$ npx create-matman-app my-app --template=jest-ts`,
+    dependencies: `- 测试框架：[Jest](https://https://jestjs.io/)\n- TypeScript：[TypeScript](https://www.typescriptlang.org/)`,
+  });
+
+  // 复制 test 文件夹的执行脚本
+  fse.copySync(path.join(path.join(templateRootDir, 'jest'), 'test'), path.join(demoDistDir, 'test'));
+
+  // package.json
+  copyPackageJson(path.join(templateRootDir, 'project-ts'), demoDistDir, demoOverrideDir);
+}
+
+
 generateDemoJest();
 generateDemoMocha();
 generateDemoMochaTs();
+generateDemoJestTs();

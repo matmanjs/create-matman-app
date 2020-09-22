@@ -1,5 +1,5 @@
 {
-  "name": "matman-ts",
+  "name": "create-matman-app-mocha-ts",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
