@@ -18,4 +18,4 @@ $ npx create-matman-app [project_name] --template=jest
 $ npx create-matman-app [project_name] --template=jest-ts
 ```
 
-更多资料请参考： https://github.com/matmanjs/create-matman-app 。
+更多资料请参考： https://matmanjs.github.io/matman/tool/create-matman-app.html 。
