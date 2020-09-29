@@ -344,8 +344,8 @@ export class InitUtil {
 
     const templateMap: mapType = {
       mocha: 'cma-template',
-      ts: 'cma-template-typescript',
-      'mocha-ts': 'cma-template-typescript',
+      ts: 'cma-template-mocha-ts',
+      'mocha-ts': 'cma-template-mocha-ts',
       jest: 'cma-template-jest',
       'jest-ts': 'cma-template-jest-ts'
     };
