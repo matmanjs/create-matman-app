@@ -1,6 +1,6 @@
 {
   "name": "cma-template-mocha-ts",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "matman project template use Mocha and TypeScript",
   "keywords": [
     "matman",
