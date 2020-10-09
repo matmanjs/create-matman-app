@@ -2,7 +2,8 @@
   "name": "create-matman-app-jest",
   "private": true,
   "scripts": {
-    "test": "npm run test:e2e",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "jest test/unit",
     "test:e2e": "node test/run-e2e-test.js",
     "test:e2e:show": "cross-env SHOW_BROWSER=1 npm run test:e2e",
     "test:e2e:direct": "jest test/e2e",
