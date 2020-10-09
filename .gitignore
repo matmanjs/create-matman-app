@@ -4,3 +4,5 @@ packages/*/lib
 .DS_Store
 .idea
 tmp
+
+.nyc_output

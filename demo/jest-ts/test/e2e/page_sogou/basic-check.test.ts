@@ -1,9 +1,12 @@
+import { MatmanResult } from 'matman-core';
+
+// @ts-ignore
 import * as checkPage from '../../../DevOps/matman-app/case_modules/page_sogou/basic-check';
 
 describe('搜狗首页：点击获取信息(默认debug)', function () {
   jest.setTimeout(30000);
 
-  let resultData;
+  let resultData: MatmanResult;
 
   beforeAll(async () => {
     resultData = await checkPage({
@@ -14,7 +17,7 @@ describe('搜狗首页：点击获取信息(默认debug)', function () {
   });
 
   describe('第一步：开始操作之前，等待页面加载完成', () => {
-    let data;
+    let data: any;
 
     beforeAll(() => {
       data = resultData.get('init');
@@ -52,7 +55,7 @@ describe('搜狗首页：点击获取信息(默认debug)', function () {
   });
 
   describe('第二步：点击按钮', () => {
-    let data;
+    let data: any;
 
     beforeAll(() => {
       data = resultData.get('click');
