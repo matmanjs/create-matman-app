@@ -34,7 +34,7 @@ function getDevRules(opts = {}) {
   const projectRootPath = opts.projectRootPath || getProjectRootPath();
 
   // mockstar 启动时需要的端口号
-  const mockstarPort = opts.mockstarPort || 9527;
+  const mockstarPort = opts.mockstarPort || process.env.MOCKSTAR_PORT || 9527;
 
   // whistle 规则集的名字，会展示在 whistle 管理端 Rules 这个 tab 下
   // 实际上这个名字是可以任意字符串，详见： http://wproxy.org/whistle/webui/rules.html
@@ -56,7 +56,7 @@ function getDevRules(opts = {}) {
 }
 
 /**
- * 动态生成 whistle 规则，用于 dev 场景
+ * 动态生成 whistle 规则，用于 prod 场景
  *
  * @param {Object} [opts] 参数
  * @param {String} [opts.projectRootPath] 项目的根路径
@@ -68,7 +68,7 @@ function getProdRules(opts = {}) {
   const projectRootPath = opts.projectRootPath || getProjectRootPath();
 
   // mockstar 启动时需要的端口号
-  const mockstarPort = opts.mockstarPort || 9527;
+  const mockstarPort = opts.mockstarPort || process.env.MOCKSTAR_PORT || 9527;
 
   // whistle 规则集的名字，会展示在 whistle 管理端 Rules 这个 tab 下
   // 实际上这个名字是可以任意字符串，详见： http://wproxy.org/whistle/webui/rules.html
