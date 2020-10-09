@@ -1,7 +1,7 @@
 const _ = require('lodash');
 
 function getDescribeForRes(msg) {
-  return _.concat('来自接口返回：', JSON.stringify(msg)).join(' ');
+  return _.concat('来自接口返回：', (typeof msg === 'object') ? JSON.stringify(msg) : msg).join(' ');
 }
 
 function iAmNotCalled() {
