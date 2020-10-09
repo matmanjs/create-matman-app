@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { MatmanResult } from 'matman-core';
 
 // @ts-ignore
-import checkPage from '../../../DevOps/matman-app/case_modules/page_sogou/basic-check';
+import * as checkPage from '../../../DevOps/matman-app/case_modules/page_sogou/basic-check';
 
 describe('搜狗首页：点击获取信息(默认debug)', function () {
   this.timeout(30000);

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 export function getDescribeForRes(msg: any): string {
   return _.concat('来自接口返回：', (typeof msg === 'object') ? JSON.stringify(msg) : msg).join(' ');
