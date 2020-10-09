@@ -158,6 +158,7 @@ function generateDemoMochaTs() {
   fse.copySync(path.join(demoOverrideDir, 'test'), path.join(demoDistDir, 'test'));
 
   fse.copySync(path.join(demoOverrideDir, '.mocharc.yml'), path.join(demoDistDir, '.mocharc.yml'));
+  fse.copySync(path.join(demoOverrideDir, '.nycrc'), path.join(demoDistDir, '.nycrc'));
 
   // copy e2e scripts
   copyE2EScript(templateRootDir, demoDistDir, 'mocha');
