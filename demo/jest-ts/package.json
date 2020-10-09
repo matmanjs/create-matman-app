@@ -2,8 +2,7 @@
   "name": "create-matman-app-jest-ts",
   "private": true,
   "dependencies": {
-    "lodash": "^4.17.20",
-    "matman-core": "^6.0.17"
+    "lodash": "^4.17.20"
   },
   "scripts": {
     "build-dev": "webpack --config webpack.dev.config.js",
@@ -35,6 +34,7 @@
     "@types/jest": "^26.0.14",
     "jest": "^26.4.2",
     "ts-jest": "^26.4.0",
-    "jest-matman-reporter": "^0.1.0"
+    "jest-matman-reporter": "^0.1.0",
+    "matman-core": "^6.0.17"
   }
 }

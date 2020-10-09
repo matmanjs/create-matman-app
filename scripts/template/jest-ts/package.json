@@ -15,6 +15,7 @@
     "jest": "^26.4.2",
     "ts-jest": "^26.4.0",
     "jest-matman-reporter": "^0.1.0",
-    "matman-e2e-test": "^1.2.1"
+    "matman-e2e-test": "^1.2.1",
+    "matman-core": "^6.0.17"
   }
 }
