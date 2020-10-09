@@ -31,6 +31,7 @@
     "cross-env": "^7.0.2",
     "html-webpack-plugin": "^4.5.0",
     "istanbul-instrumenter-loader": "^3.0.1",
+    "matman-core": "^6.0.17",
     "matman-e2e-test": "^1.2.1",
     "mocha": "^8.1.3",
     "mochawesome": "^6.1.1",
