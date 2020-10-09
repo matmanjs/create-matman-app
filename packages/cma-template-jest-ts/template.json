@@ -10,7 +10,8 @@
       "build-prod": "webpack --config webpack.prod.config.js",
       "use-whistle-dev": "cd DevOps/whistle && npm run use-dev",
       "use-whistle-prod": "cd DevOps/whistle && npm run use-prod",
-      "test": "npm run test:e2e",
+      "test": "npm run test:unit && npm run test:e2e",
+      "test:unit": "jest test/unit",
       "test:e2e": "node test/run-e2e-test.js",
       "test:e2e:show": "cross-env SHOW_BROWSER=1 npm run test:e2e",
       "test:e2e:direct": "jest test/e2e",
@@ -19,6 +20,7 @@
     },
     "devDependencies": {
       "@types/jquery": "^3.5.1",
+      "@types/lodash": "^4.14.161",
       "@types/node": "^14.11.2",
       "clean-webpack-plugin": "^3.0.0",
       "cross-env": "^7.0.2",
@@ -33,7 +35,8 @@
       "@types/jest": "^26.0.14",
       "jest": "^26.4.2",
       "ts-jest": "^26.4.0",
-      "jest-matman-reporter": "^0.1.0"
+      "jest-matman-reporter": "^0.1.0",
+      "matman-core": "^6.0.17"
     }
   }
 }

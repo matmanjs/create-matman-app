@@ -24,6 +24,7 @@ function generate(demoDir, npmDir, shouldClear) {
   fse.removeSync(path.join(demoDir, '.DS_Store'));
   fse.removeSync(path.join(demoDir, 'package-lock.json'));
   fse.removeSync(path.join(demoDir, '.matman_output'));
+  fse.removeSync(path.join(demoDir, '.nyc_output'));
 
   fse.copySync(demoDir, distTemplateDir);
   fse.removeSync(path.join(distTemplateDir, 'package.json'));

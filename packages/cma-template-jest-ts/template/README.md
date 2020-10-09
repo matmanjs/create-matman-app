@@ -38,6 +38,9 @@ $ npm install
 - 第五步：执行测试文件
 
 ```bash
+# 执行单元
+$ npm run test:unit
+
 # 执行 web 端对端测试
 $ npm run test:e2e
 
