@@ -14,7 +14,7 @@ function bindClickEvent() {
           $('#msg').text(getDescribeForRes(jsonData.result.description));
           $('#msg').removeClass('alert-info').addClass('alert-success').addClass('msg-loaded');
         } else {
-          $('#msg').text(getDescribeForRes(JSON.stringify(jsonData)));
+          $('#msg').text(getDescribeForRes(jsonData));
           $('#msg').removeClass('alert-info').addClass('alert-danger').addClass('msg-loaded');
         }
 
