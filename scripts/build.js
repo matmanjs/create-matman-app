@@ -66,11 +66,33 @@ function copyReadMe(sourceDir, distDir, data) {
 }
 
 function copyPackageJson(sourceDir, distDir, overrideDir) {
-  fse.outputJson(path.join(distDir, 'package.json'), _.merge(
+  const newPackageJson = _.merge(
     {},
     fse.readJsonSync(path.join(sourceDir, 'package.json')),
     fse.readJsonSync(path.join(overrideDir, 'package.json')),
-  ), {
+  );
+
+  function sortDep(item) {
+    if (!item) {
+      return item;
+    }
+
+    const result = {};
+
+    Object.keys(item).sort().forEach((key) => {
+      result[key] = item[key];
+    });
+
+    return result;
+  }
+
+  // 对 devDependencies 进行排序
+  newPackageJson.devDependencies = sortDep(newPackageJson.devDependencies);
+
+  // 对 dependencies 进行排序
+  newPackageJson.dependencies = sortDep(newPackageJson.dependencies);
+
+  fse.outputJson(path.join(distDir, 'package.json'), newPackageJson, {
     spaces: '  ',
   });
 }
