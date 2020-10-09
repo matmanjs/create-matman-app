@@ -17,6 +17,6 @@ module.exports = {
 
   // 统计单元测试覆盖率
   collectCoverage: true,
-  coverageDirectory: '.test_output/coverage',
+  coverageDirectory: '.matman_output/coverage',
   collectCoverageFrom: ['src/**/*.{js,ts}', '!node_modules/**', '!DevOps/**', '!build/**'],
 };
